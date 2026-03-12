@@ -1,0 +1,383 @@
+Initialized native services in: C:\Users\s-rin\.gradle\native
+Initialized jansi services in: C:\Users\s-rin\.gradle\native
+The client will now receive all logging from the daemon (pid: 102164). The daemon log file: C:\Users\s-rin\.gradle\daemon\8.13\daemon-102164.out.log
+Starting 21st build in daemon [uptime: 2 hrs 52 mins 39.056 secs, performance: 98%, GC rate: 0.00/s, heap usage: 13% of 2 GiB]
+Using 20 worker leases.
+Now considering [E:\github\Mi] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'E:\github\Mi\settings.gradle.kts'.
+Projects loaded. Root project using build file 'E:\github\Mi\build.gradle.kts'.
+Included projects: [root project 'Mi', project ':app']
+
+> Configure project :
+Evaluating root project 'Mi' using build file 'E:\github\Mi\build.gradle.kts'.
+Resolved plugin [id: 'com.android.application', version: '8.13.2', apply: false]
+Resolved plugin [id: 'org.jetbrains.kotlin.android', version: '2.0.21', apply: false]
+Resolved plugin [id: 'org.jetbrains.kotlin.plugin.compose', version: '2.0.21', apply: false]
+Resolved plugin [id: 'com.google.devtools.ksp', version: '2.0.21-1.0.28', apply: false]
+Resolved plugin [id: 'com.google.dagger.hilt.android', version: '2.51.1', apply: false]
+
+> Configure project :app
+Evaluating project ':app' using build file 'E:\github\Mi\app\build.gradle.kts'.
+Resolved plugin [id: 'com.android.application', version: '8.13.2']
+Resolved plugin [id: 'org.jetbrains.kotlin.android', version: '2.0.21']
+Resolved plugin [id: 'org.jetbrains.kotlin.plugin.compose', version: '2.0.21']
+Resolved plugin [id: 'com.google.devtools.ksp', version: '2.0.21-1.0.28']
+Resolved plugin [id: 'com.google.dagger.hilt.android', version: '2.51.1']
+Using default execution profile
+Using Kotlin Gradle Plugin gradle85 variant
+Detected Android Gradle Plugin compose compiler configuration
+Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileDebugKotlin
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileDebugAndroidTestKotlin
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+All projects evaluated.
+Task name matched 'assembleDebug'
+Selected primary task 'assembleDebug' from project :
+Tasks to be executed: [task ':app:preBuild', task ':app:preDebugBuild', task ':app:mergeDebugNativeDebugMetadata', task ':app:checkKotlinGradlePluginConfigurationErrors', task ':app:generateDebugBuildConfig', task ':app:checkDebugAarMetadata', task ':app:processDebugNavigationResources', task ':app:compileDebugNavigationResources', task ':app:generateDebugResValues', task ':app:mapDebugSourceSetPaths', task ':app:generateDebugResources', task ':app:mergeDebugResources', task ':app:packageDebugResources', task ':app:parseDebugLocalResources', task ':app:createDebugCompatibleScreenManifests', task ':app:extractDeepLinksDebug', task ':app:processDebugMainManifest', task ':app:processDebugManifest', task ':app:processDebugManifestForPackage', task ':app:processDebugResources', task ':app:kspDebugKotlin', task ':app:compileDebugKotlin', task ':app:javaPreCompileDebug', task ':app:compileDebugJavaWithJavac', task ':app:mergeDebugShaders', task ':app:compileDebugShaders', task ':app:generateDebugAssets', task ':app:mergeDebugAssets', task ':app:compressDebugAssets', task ':app:l8DexDesugarLibDebug', task ':app:hiltAggregateDepsDebug', task ':app:hiltJavaCompileDebug', task ':app:processDebugJavaRes', task ':app:mergeDebugJavaResource', task ':app:checkDebugDuplicateClasses', task ':app:desugarDebugFileDependencies', task ':app:mergeExtDexDebug', task ':app:mergeLibDexDebug', task ':app:transformDebugClassesWithAsm', task ':app:dexBuilderDebug', task ':app:mergeProjectDexDebug', task ':app:mergeDebugJniLibFolders', task ':app:mergeDebugNativeLibs', task ':app:stripDebugDebugSymbols', task ':app:validateSigningDebug', task ':app:writeDebugAppMetadata', task ':app:writeDebugSigningConfigVersions', task ':app:packageDebug', task ':app:createDebugApkListingFileRedirect', task ':app:assembleDebug']
+Tasks that were excluded: []
+Resolve mutations for :app:preBuild (Thread[#3679,Execution worker,5,main]) started.
+:app:preBuild (Thread[#3684,Execution worker Thread 6,5,main]) started.
+
+> Task :app:preBuild UP-TO-DATE
+Skipping task ':app:preBuild' as it has no actions.
+Resolve mutations for :app:preDebugBuild (Thread[#3684,Execution worker Thread 6,5,main]) started.
+:app:preDebugBuild (Thread[#3687,Execution worker Thread 9,5,main]) started.
+
+> Task :app:preDebugBuild UP-TO-DATE
+Skipping task ':app:preDebugBuild' as it has no actions.
+Resolve mutations for :app:mergeDebugNativeDebugMetadata (Thread[#3687,Execution worker Thread 9,5,main]) started.
+:app:mergeDebugNativeDebugMetadata (Thread[#3687,Execution worker Thread 9,5,main]) started.
+
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+Skipping task ':app:mergeDebugNativeDebugMetadata' as it has no source files and no previous output files.
+Resolve mutations for :app:checkKotlinGradlePluginConfigurationErrors (Thread[#3687,Execution worker Thread 9,5,main]) started.
+:app:checkKotlinGradlePluginConfigurationErrors (Thread[#3685,Execution worker Thread 7,5,main]) started.
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':app:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :app:generateDebugBuildConfig (Thread[#3685,Execution worker Thread 7,5,main]) started.
+:app:generateDebugBuildConfig (Thread[#3698,Execution worker Thread 19,5,main]) started.
+
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+Caching disabled for task ':app:generateDebugBuildConfig' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugBuildConfig' as it is up-to-date.
+Resolve mutations for :app:checkDebugAarMetadata (Thread[#3698,Execution worker Thread 19,5,main]) started.
+:app:checkDebugAarMetadata (Thread[#3696,Execution worker Thread 17,5,main]) started.
+
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':app:checkDebugAarMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:checkDebugAarMetadata' as it is up-to-date.
+Resolve mutations for :app:processDebugNavigationResources (Thread[#3696,Execution worker Thread 17,5,main]) started.
+:app:processDebugNavigationResources (Thread[#3696,Execution worker Thread 17,5,main]) started.
+
+> Task :app:processDebugNavigationResources UP-TO-DATE
+Caching disabled for task ':app:processDebugNavigationResources' because:
+  Build cache is disabled
+Skipping task ':app:processDebugNavigationResources' as it is up-to-date.
+Resolve mutations for :app:compileDebugNavigationResources (Thread[#3696,Execution worker Thread 17,5,main]) started.
+:app:compileDebugNavigationResources (Thread[#3687,Execution worker Thread 9,5,main]) started.
+
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+Caching disabled for task ':app:compileDebugNavigationResources' because:
+  Build cache is disabled
+Skipping task ':app:compileDebugNavigationResources' as it is up-to-date.
+Resolve mutations for :app:generateDebugResValues (Thread[#3687,Execution worker Thread 9,5,main]) started.
+:app:generateDebugResValues (Thread[#3691,Execution worker Thread 12,5,main]) started.
+
+> Task :app:generateDebugResValues UP-TO-DATE
+Caching disabled for task ':app:generateDebugResValues' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugResValues' as it is up-to-date.
+Resolve mutations for :app:mapDebugSourceSetPaths (Thread[#3691,Execution worker Thread 12,5,main]) started.
+:app:mapDebugSourceSetPaths (Thread[#3686,Execution worker Thread 8,5,main]) started.
+
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':app:mapDebugSourceSetPaths' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:mapDebugSourceSetPaths' as it is up-to-date.
+Resolve mutations for :app:generateDebugResources (Thread[#3686,Execution worker Thread 8,5,main]) started.
+:app:generateDebugResources (Thread[#3689,Execution worker Thread 11,5,main]) started.
+
+> Task :app:generateDebugResources UP-TO-DATE
+Caching disabled for task ':app:generateDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugResources' as it is up-to-date.
+Resolve mutations for :app:mergeDebugResources (Thread[#3689,Execution worker Thread 11,5,main]) started.
+:app:mergeDebugResources (Thread[#3689,Execution worker Thread 11,5,main]) started.
+
+> Task :app:mergeDebugResources UP-TO-DATE
+Caching disabled for task ':app:mergeDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:mergeDebugResources' as it is up-to-date.
+Resolve mutations for :app:packageDebugResources (Thread[#3689,Execution worker Thread 11,5,main]) started.
+:app:packageDebugResources (Thread[#3689,Execution worker Thread 11,5,main]) started.
+
+> Task :app:packageDebugResources UP-TO-DATE
+Caching disabled for task ':app:packageDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:packageDebugResources' as it is up-to-date.
+Resolve mutations for :app:parseDebugLocalResources (Thread[#3689,Execution worker Thread 11,5,main]) started.
+:app:parseDebugLocalResources (Thread[#3693,Execution worker Thread 14,5,main]) started.
+
+> Task :app:parseDebugLocalResources UP-TO-DATE
+Caching disabled for task ':app:parseDebugLocalResources' because:
+  Build cache is disabled
+Skipping task ':app:parseDebugLocalResources' as it is up-to-date.
+Resolve mutations for :app:createDebugCompatibleScreenManifests (Thread[#3693,Execution worker Thread 14,5,main]) started.
+:app:createDebugCompatibleScreenManifests (Thread[#3678,included builds,5,main]) started.
+
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+Caching disabled for task ':app:createDebugCompatibleScreenManifests' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:createDebugCompatibleScreenManifests' as it is up-to-date.
+Resolve mutations for :app:extractDeepLinksDebug (Thread[#3678,included builds,5,main]) started.
+:app:extractDeepLinksDebug (Thread[#3678,included builds,5,main]) started.
+
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+Caching disabled for task ':app:extractDeepLinksDebug' because:
+  Build cache is disabled
+Skipping task ':app:extractDeepLinksDebug' as it is up-to-date.
+Resolve mutations for :app:processDebugMainManifest (Thread[#3678,included builds,5,main]) started.
+:app:processDebugMainManifest (Thread[#3691,Execution worker Thread 12,5,main]) started.
+
+> Task :app:processDebugMainManifest UP-TO-DATE
+Caching disabled for task ':app:processDebugMainManifest' because:
+  Build cache is disabled
+Skipping task ':app:processDebugMainManifest' as it is up-to-date.
+Resolve mutations for :app:processDebugManifest (Thread[#3691,Execution worker Thread 12,5,main]) started.
+:app:processDebugManifest (Thread[#3691,Execution worker Thread 12,5,main]) started.
+
+> Task :app:processDebugManifest UP-TO-DATE
+Caching disabled for task ':app:processDebugManifest' because:
+  Build cache is disabled
+Skipping task ':app:processDebugManifest' as it is up-to-date.
+Resolve mutations for :app:processDebugManifestForPackage (Thread[#3691,Execution worker Thread 12,5,main]) started.
+:app:processDebugManifestForPackage (Thread[#3691,Execution worker Thread 12,5,main]) started.
+
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+Custom actions are attached to task ':app:processDebugManifestForPackage'.
+Caching disabled for task ':app:processDebugManifestForPackage' because:
+  Build cache is disabled
+Skipping task ':app:processDebugManifestForPackage' as it is up-to-date.
+Resolve mutations for :app:processDebugResources (Thread[#3691,Execution worker Thread 12,5,main]) started.
+:app:processDebugResources (Thread[#3691,Execution worker Thread 12,5,main]) started.
+
+> Task :app:processDebugResources UP-TO-DATE
+Caching disabled for task ':app:processDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:processDebugResources' as it is up-to-date.
+Resolve mutations for :app:kspDebugKotlin (Thread[#3691,Execution worker Thread 12,5,main]) started.
+:app:kspDebugKotlin (Thread[#3691,Execution worker Thread 12,5,main]) started.
+Resolve mutations for :app:javaPreCompileDebug (Thread[#3688,Execution worker Thread 10,5,main]) started.
+:app:javaPreCompileDebug (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:javaPreCompileDebug UP-TO-DATE
+Caching disabled for task ':app:javaPreCompileDebug' because:
+  Build cache is disabled
+Skipping task ':app:javaPreCompileDebug' as it is up-to-date.
+Resolve mutations for :app:mergeDebugShaders (Thread[#3688,Execution worker Thread 10,5,main]) started.
+:app:mergeDebugShaders (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:mergeDebugShaders UP-TO-DATE
+Caching disabled for task ':app:mergeDebugShaders' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':app:mergeDebugShaders' as it is up-to-date.
+Resolve mutations for :app:compileDebugShaders (Thread[#3688,Execution worker Thread 10,5,main]) started.
+:app:compileDebugShaders (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:compileDebugShaders NO-SOURCE
+Skipping task ':app:compileDebugShaders' as it has no source files and no previous output files.
+Resolve mutations for :app:generateDebugAssets (Thread[#3688,Execution worker Thread 10,5,main]) started.
+:app:generateDebugAssets (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:generateDebugAssets UP-TO-DATE
+Skipping task ':app:generateDebugAssets' as it has no actions.
+Resolve mutations for :app:mergeDebugAssets (Thread[#3692,Execution worker Thread 13,5,main]) started.
+:app:mergeDebugAssets (Thread[#3695,Execution worker Thread 16,5,main]) started.
+
+> Task :app:mergeDebugAssets UP-TO-DATE
+Caching disabled for task ':app:mergeDebugAssets' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':app:mergeDebugAssets' as it is up-to-date.
+Resolve mutations for :app:compressDebugAssets (Thread[#3695,Execution worker Thread 16,5,main]) started.
+:app:compressDebugAssets (Thread[#3678,included builds,5,main]) started.
+
+> Task :app:compressDebugAssets UP-TO-DATE
+Caching disabled for task ':app:compressDebugAssets' because:
+  Build cache is disabled
+Skipping task ':app:compressDebugAssets' as it is up-to-date.
+Resolve mutations for :app:l8DexDesugarLibDebug (Thread[#3678,included builds,5,main]) started.
+:app:l8DexDesugarLibDebug (Thread[#3678,included builds,5,main]) started.
+
+> Task :app:l8DexDesugarLibDebug UP-TO-DATE
+Caching disabled for task ':app:l8DexDesugarLibDebug' because:
+  Build cache is disabled
+Skipping task ':app:l8DexDesugarLibDebug' as it is up-to-date.
+Resolve mutations for :app:checkDebugDuplicateClasses (Thread[#3678,included builds,5,main]) started.
+:app:checkDebugDuplicateClasses (Thread[#3678,included builds,5,main]) started.
+
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+Caching disabled for task ':app:checkDebugDuplicateClasses' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:checkDebugDuplicateClasses' as it is up-to-date.
+Resolve mutations for :app:desugarDebugFileDependencies (Thread[#3678,included builds,5,main]) started.
+:app:desugarDebugFileDependencies (Thread[#3683,Execution worker Thread 5,5,main]) started.
+
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+Caching disabled for task ':app:desugarDebugFileDependencies' because:
+  Build cache is disabled
+Skipping task ':app:desugarDebugFileDependencies' as it is up-to-date.
+Resolve mutations for :app:mergeExtDexDebug (Thread[#3683,Execution worker Thread 5,5,main]) started.
+:app:mergeExtDexDebug (Thread[#3683,Execution worker Thread 5,5,main]) started.
+
+> Task :app:mergeExtDexDebug UP-TO-DATE
+Caching disabled for task ':app:mergeExtDexDebug' because:
+  Build cache is disabled
+Skipping task ':app:mergeExtDexDebug' as it is up-to-date.
+Resolve mutations for :app:mergeLibDexDebug (Thread[#3683,Execution worker Thread 5,5,main]) started.
+:app:mergeLibDexDebug (Thread[#3683,Execution worker Thread 5,5,main]) started.
+
+> Task :app:mergeLibDexDebug UP-TO-DATE
+Caching disabled for task ':app:mergeLibDexDebug' because:
+  Build cache is disabled
+Skipping task ':app:mergeLibDexDebug' as it is up-to-date.
+Resolve mutations for :app:mergeDebugJniLibFolders (Thread[#3683,Execution worker Thread 5,5,main]) started.
+:app:mergeDebugJniLibFolders (Thread[#3687,Execution worker Thread 9,5,main]) started.
+
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+Caching disabled for task ':app:mergeDebugJniLibFolders' because:
+  Build cache is disabled
+  Simple merging task
+Skipping task ':app:mergeDebugJniLibFolders' as it is up-to-date.
+Resolve mutations for :app:mergeDebugNativeLibs (Thread[#3687,Execution worker Thread 9,5,main]) started.
+:app:mergeDebugNativeLibs (Thread[#3687,Execution worker Thread 9,5,main]) started.
+
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+Caching disabled for task ':app:mergeDebugNativeLibs' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:mergeDebugNativeLibs' as it is up-to-date.
+Resolve mutations for :app:stripDebugDebugSymbols (Thread[#3687,Execution worker Thread 9,5,main]) started.
+:app:stripDebugDebugSymbols (Thread[#3687,Execution worker Thread 9,5,main]) started.
+
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+Caching disabled for task ':app:stripDebugDebugSymbols' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:stripDebugDebugSymbols' as it is up-to-date.
+Resolve mutations for :app:validateSigningDebug (Thread[#3687,Execution worker Thread 9,5,main]) started.
+:app:validateSigningDebug (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:validateSigningDebug UP-TO-DATE
+Caching disabled for task ':app:validateSigningDebug' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:validateSigningDebug' as it is up-to-date.
+Resolve mutations for :app:writeDebugAppMetadata (Thread[#3688,Execution worker Thread 10,5,main]) started.
+:app:writeDebugAppMetadata (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+Caching disabled for task ':app:writeDebugAppMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:writeDebugAppMetadata' as it is up-to-date.
+Resolve mutations for :app:writeDebugSigningConfigVersions (Thread[#3688,Execution worker Thread 10,5,main]) started.
+:app:writeDebugSigningConfigVersions (Thread[#3688,Execution worker Thread 10,5,main]) started.
+
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+Caching disabled for task ':app:writeDebugSigningConfigVersions' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:writeDebugSigningConfigVersions' as it is up-to-date.
+
+> Task :app:kspDebugKotlin
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+Caching disabled for task ':app:kspDebugKotlin' because:
+  Build cache is disabled
+Task ':app:kspDebugKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':app:kspDebugKotlin'.
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+Kotlin source files: E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\db\dao\Daos.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\db\entity\Entities.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\db\MiDatabase.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\preferences\AppPreferences.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\remote\discord\DiscordWebSocketClient.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\remote\google\GoogleApis.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\remote\lmstudio\LMStudioApi.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\repository\AiRepository.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\repository\GoogleRepositories.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\repository\Repositories.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\di\DatabaseModule.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\di\NetworkModule.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\domain\model\Models.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\MainActivity.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\MiApplication.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\receiver\BootReceiver.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\service\DiscordService.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\service\TimerForegroundService.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\DraggableWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\AiWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\CalendarTodoWidgets.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\ClockWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\DailyTaskWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\DiscordWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\ImageWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\MemoWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\ProgressWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\TimerWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\WebhookButtonWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\navigation\AppNavigation.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\screens\DashboardScreen.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\screens\settings\SettingsScreen.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\theme\Color.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\theme\Theme.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\theme\Type.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\AiViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\DailyTaskViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\DashboardViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\DiscordViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\GoogleViewModels.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\MemoViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\SettingsViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\TimerViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\WebhookViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\worker\ScreenDimWorker.kt
+Java source files: E:\github\Mi\app\build\generated\source\buildConfig\debug\com\nbks\mi\BuildConfig.java
+Script source files: 
+Script file extensions: 
+[KOTLIN] Kotlin compilation 'jdkHome' argument: null
+i: [ksp] loaded provider(s): [dagger.hilt.processor.internal.uninstallmodules.KspUninstallModulesProcessor$Provider, dagger.hilt.android.processor.internal.customtestapplication.KspCustomTestApplicationProcessor$Provider, dagger.hilt.processor.internal.aliasof.KspAliasOfProcessor$Provider, dagger.hilt.android.processor.internal.viewmodel.KspViewModelProcessor$Provider, dagger.hilt.processor.internal.earlyentrypoint.KspEarlyEntryPointProcessor$Provider, dagger.hilt.processor.internal.generatesrootinput.KspGeneratesRootInputProcessor$Provider, dagger.hilt.android.processor.internal.androidentrypoint.KspAndroidEntryPointProcessor$Provider, dagger.hilt.processor.internal.originatingelement.KspOriginatingElementProcessor$Provider, dagger.hilt.android.processor.internal.bindvalue.KspBindValueProcessor$Provider, dagger.hilt.processor.internal.definecomponent.KspDefineComponentProcessor$Provider, dagger.hilt.processor.internal.root.KspRootProcessor$Provider, dagger.hilt.processor.internal.aggregateddeps.KspAggregatedDepsProcessor$Provider, dagger.hilt.processor.internal.root.KspComponentTreeDepsProcessor$Provider, androidx.hilt.AndroidXHiltKspProcessor$Provider, androidx.room.RoomKspProcessor$Provider, dagger.internal.codegen.KspComponentProcessor$Provider]
+e: [ksp] InjectProcessingStep was unable to process 'DailyTaskRepository(error.NonExistentClass)' because 'error.NonExistentClass' could not be resolved.
+
+Dependency trace:
+    => element (CLASS): com.nbks.mi.data.repository.DailyTaskRepository
+    => element (CONSTRUCTOR): DailyTaskRepository(error.NonExistentClass)
+    => type (EXECUTABLE constructor): (error.NonExistentClass)void
+    => type (ERROR parameter type): error.NonExistentClass
+
+If type 'error.NonExistentClass' is a generated type, check above for compilation errors that may have prevented the type from being generated. Otherwise, ensure that type 'error.NonExistentClass' is on your classpath.
+e: [ksp] InjectProcessingStep was unable to process 'WebhookButtonRepository(error.NonExistentClass)' because 'error.NonExistentClass' could not be resolved.
+
+Dependency trace:
+    => element (CLASS): com.nbks.mi.data.repository.WebhookButtonRepository
+    => element (CONSTRUCTOR): WebhookButtonRepository(error.NonExistentClass)
+    => type (EXECUTABLE constructor): (error.NonExistentClass)void
+    => type (ERROR parameter type): error.NonExistentClass
+
+If type 'error.NonExistentClass' is a generated type, check above for compilation errors that may have prevented the type from being generated. Otherwise, ensure that type 'error.NonExistentClass' is on your classpath.
+e: Error occurred in KSP, check log for detail
+Finished executing kotlin compiler using DAEMON strategy
+
+> Task :app:kspDebugKotlin FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:kspDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+32 actionable tasks: 1 executed, 31 up-to-date
+Watched directory hierarchies: [E:\github\Mi]
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 4s

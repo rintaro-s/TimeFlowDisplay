@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Mi</string>
+
+    <!-- General -->
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="save">保存</string>
+    <string name="delete">削除</string>
+    <string name="edit">編集</string>
+    <string name="close">閉じる</string>
+    <string name="back">戻る</string>
+    <string name="settings">設定</string>
+    <string name="add">追加</string>
+    <string name="connect">接続</string>
+    <string name="disconnect">切断</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Mi</string>
+    <string name="edit_mode">編集モード</string>
+    <string name="add_widget">ウィジェットを追加</string>
+    <string name="exit_edit_mode">編集モードを終了</string>
+
+    <!-- Widgets -->
+    <string name="widget_clock">時計</string>
+    <string name="widget_calendar">カレンダー</string>
+    <string name="widget_todo">ToDo</string>
+    <string name="widget_memo">メモ</string>
+    <string name="widget_timer">タイマー</string>
+    <string name="widget_progress">進捗</string>
+    <string name="widget_ai">AI チャット</string>
+    <string name="widget_daily_alarm">時刻アラーム</string>
+
+    <!-- Timer -->
+    <string name="timer_start">開始</string>
+    <string name="timer_pause">一時停止</string>
+    <string name="timer_resume">再開</string>
+    <string name="timer_stop">停止</string>
+    <string name="timer_label">ラベル</string>
+    <string name="timer_silent">サイレント</string>
+    <string name="timer_complete">タイマー完了</string>
+
+    <!-- Memo -->
+    <string name="memo_title">タイトル</string>
+    <string name="memo_content">内容</string>
+    <string name="memo_pin">ピン留め</string>
+    <string name="memo_new">新しいメモ</string>
+
+    <!-- AI -->
+    <string name="ai_placeholder">メッセージを入力…</string>
+    <string name="ai_send">送信</string>
+    <string name="ai_thinking">考え中…</string>
+    <string name="ai_not_configured">LMStudioが設定されていません</string>
+
+    <!-- Discord -->
+    <!-- Progress -->
+    <string name="progress_today">今日</string>
+    <string name="progress_week">今週</string>
+    <string name="progress_month">今月</string>
+    <string name="progress_year">今年</string>
+
+    <!-- Settings -->
+    <string name="settings_display">表示・テーマ</string>
+    <string name="settings_google">Google連携</string>
+    <string name="settings_lmstudio">AI (LMStudio)</string>
+    <string name="settings_schedule">スケジュール</string>
+    <string name="settings_dark_mode">ダークモード</string>
+    <string name="settings_dynamic_color">ダイナミックカラー</string>
+    <string name="settings_clock_style">時計スタイル</string>
+    <string name="settings_wallpaper">壁紙</string>
+    <string name="settings_keep_screen_on">画面常時点灯</string>
+    <string name="settings_google_account">Googleアカウント</string>
+    <string name="settings_sign_in">Googleでサインイン</string>
+    <string name="settings_sign_out">サインアウト</string>
+    <string name="settings_lmstudio_url">サーバーURL</string>
+    <string name="settings_lmstudio_model">モデル名</string>
+    <string name="settings_discord_token">Botトークン</string>
+    <string name="settings_guild_id">サーバーID</string>
+    <string name="settings_channel_ids">チャンネルID</string>
+
+    <!-- Notifications -->
+    <string name="notification_timer_channel">タイマー</string>
+    <string name="notification_discord_channel">Discord Bot</string>
+    <string name="notification_screen_dim_channel">画面制御</string>
+</resources>

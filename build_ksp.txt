@@ -1,0 +1,255 @@
+Initialized native services in: C:\Users\s-rin\.gradle\native
+Initialized jansi services in: C:\Users\s-rin\.gradle\native
+The client will now receive all logging from the daemon (pid: 102164). The daemon log file: C:\Users\s-rin\.gradle\daemon\8.13\daemon-102164.out.log
+Starting 22nd build in daemon [uptime: 2 hrs 53 mins 4.609 secs, performance: 98%, GC rate: 0.00/s, heap usage: 13% of 2 GiB]
+Using 20 worker leases.
+Now considering [E:\github\Mi] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'E:\github\Mi\settings.gradle.kts'.
+Projects loaded. Root project using build file 'E:\github\Mi\build.gradle.kts'.
+Included projects: [root project 'Mi', project ':app']
+
+> Configure project :
+Evaluating root project 'Mi' using build file 'E:\github\Mi\build.gradle.kts'.
+Resolved plugin [id: 'com.android.application', version: '8.13.2', apply: false]
+Resolved plugin [id: 'org.jetbrains.kotlin.android', version: '2.0.21', apply: false]
+Resolved plugin [id: 'org.jetbrains.kotlin.plugin.compose', version: '2.0.21', apply: false]
+Resolved plugin [id: 'com.google.devtools.ksp', version: '2.0.21-1.0.28', apply: false]
+Resolved plugin [id: 'com.google.dagger.hilt.android', version: '2.51.1', apply: false]
+
+> Configure project :app
+Evaluating project ':app' using build file 'E:\github\Mi\app\build.gradle.kts'.
+Resolved plugin [id: 'com.android.application', version: '8.13.2']
+Resolved plugin [id: 'org.jetbrains.kotlin.android', version: '2.0.21']
+Resolved plugin [id: 'org.jetbrains.kotlin.plugin.compose', version: '2.0.21']
+Resolved plugin [id: 'com.google.devtools.ksp', version: '2.0.21-1.0.28']
+Resolved plugin [id: 'com.google.dagger.hilt.android', version: '2.51.1']
+Using default execution profile
+Using Kotlin Gradle Plugin gradle85 variant
+Detected Android Gradle Plugin compose compiler configuration
+Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileDebugKotlin
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileDebugAndroidTestKotlin
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+All projects evaluated.
+Task path ':app:kspDebugKotlin' matched project ':app'
+Task name matched 'kspDebugKotlin'
+Selected primary task 'kspDebugKotlin' from project :app
+Tasks to be executed: [task ':app:checkKotlinGradlePluginConfigurationErrors', task ':app:preBuild', task ':app:preDebugBuild', task ':app:generateDebugBuildConfig', task ':app:checkDebugAarMetadata', task ':app:processDebugNavigationResources', task ':app:compileDebugNavigationResources', task ':app:generateDebugResValues', task ':app:mapDebugSourceSetPaths', task ':app:generateDebugResources', task ':app:mergeDebugResources', task ':app:packageDebugResources', task ':app:parseDebugLocalResources', task ':app:createDebugCompatibleScreenManifests', task ':app:extractDeepLinksDebug', task ':app:processDebugMainManifest', task ':app:processDebugManifest', task ':app:processDebugManifestForPackage', task ':app:processDebugResources', task ':app:kspDebugKotlin']
+Tasks that were excluded: []
+Resolve mutations for :app:checkKotlinGradlePluginConfigurationErrors (Thread[#3830,Execution worker,5,main]) started.
+:app:checkKotlinGradlePluginConfigurationErrors (Thread[#3830,Execution worker,5,main]) started.
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':app:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :app:preBuild (Thread[#3830,Execution worker,5,main]) started.
+:app:preBuild (Thread[#3836,Execution worker Thread 7,5,main]) started.
+
+> Task :app:preBuild UP-TO-DATE
+Skipping task ':app:preBuild' as it has no actions.
+Resolve mutations for :app:preDebugBuild (Thread[#3838,Execution worker Thread 9,5,main]) started.
+:app:preDebugBuild (Thread[#3847,Execution worker Thread 17,5,main]) started.
+
+> Task :app:preDebugBuild UP-TO-DATE
+Skipping task ':app:preDebugBuild' as it has no actions.
+Resolve mutations for :app:generateDebugBuildConfig (Thread[#3838,Execution worker Thread 9,5,main]) started.
+:app:generateDebugBuildConfig (Thread[#3842,Execution worker Thread 13,5,main]) started.
+
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+Caching disabled for task ':app:generateDebugBuildConfig' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugBuildConfig' as it is up-to-date.
+Resolve mutations for :app:checkDebugAarMetadata (Thread[#3842,Execution worker Thread 13,5,main]) started.
+:app:checkDebugAarMetadata (Thread[#3841,Execution worker Thread 12,5,main]) started.
+
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':app:checkDebugAarMetadata' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:checkDebugAarMetadata' as it is up-to-date.
+Resolve mutations for :app:processDebugNavigationResources (Thread[#3841,Execution worker Thread 12,5,main]) started.
+:app:processDebugNavigationResources (Thread[#3841,Execution worker Thread 12,5,main]) started.
+
+> Task :app:processDebugNavigationResources UP-TO-DATE
+Caching disabled for task ':app:processDebugNavigationResources' because:
+  Build cache is disabled
+Skipping task ':app:processDebugNavigationResources' as it is up-to-date.
+Resolve mutations for :app:compileDebugNavigationResources (Thread[#3841,Execution worker Thread 12,5,main]) started.
+:app:compileDebugNavigationResources (Thread[#3829,included builds,5,main]) started.
+
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+Caching disabled for task ':app:compileDebugNavigationResources' because:
+  Build cache is disabled
+Skipping task ':app:compileDebugNavigationResources' as it is up-to-date.
+Resolve mutations for :app:generateDebugResValues (Thread[#3829,included builds,5,main]) started.
+:app:generateDebugResValues (Thread[#3834,Execution worker Thread 5,5,main]) started.
+
+> Task :app:generateDebugResValues UP-TO-DATE
+Caching disabled for task ':app:generateDebugResValues' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugResValues' as it is up-to-date.
+Resolve mutations for :app:mapDebugSourceSetPaths (Thread[#3834,Execution worker Thread 5,5,main]) started.
+:app:mapDebugSourceSetPaths (Thread[#3834,Execution worker Thread 5,5,main]) started.
+
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':app:mapDebugSourceSetPaths' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:mapDebugSourceSetPaths' as it is up-to-date.
+Resolve mutations for :app:generateDebugResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+:app:generateDebugResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+
+> Task :app:generateDebugResources UP-TO-DATE
+Caching disabled for task ':app:generateDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:generateDebugResources' as it is up-to-date.
+Resolve mutations for :app:mergeDebugResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+:app:mergeDebugResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+
+> Task :app:mergeDebugResources UP-TO-DATE
+Caching disabled for task ':app:mergeDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:mergeDebugResources' as it is up-to-date.
+Resolve mutations for :app:packageDebugResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+:app:packageDebugResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+
+> Task :app:packageDebugResources UP-TO-DATE
+Caching disabled for task ':app:packageDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:packageDebugResources' as it is up-to-date.
+Resolve mutations for :app:parseDebugLocalResources (Thread[#3834,Execution worker Thread 5,5,main]) started.
+:app:parseDebugLocalResources (Thread[#3831,Execution worker Thread 2,5,main]) started.
+
+> Task :app:parseDebugLocalResources UP-TO-DATE
+Caching disabled for task ':app:parseDebugLocalResources' because:
+  Build cache is disabled
+Skipping task ':app:parseDebugLocalResources' as it is up-to-date.
+Resolve mutations for :app:createDebugCompatibleScreenManifests (Thread[#3831,Execution worker Thread 2,5,main]) started.
+:app:createDebugCompatibleScreenManifests (Thread[#3831,Execution worker Thread 2,5,main]) started.
+
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+Caching disabled for task ':app:createDebugCompatibleScreenManifests' because:
+  Build cache is disabled
+  Caching has been disabled for the task
+Skipping task ':app:createDebugCompatibleScreenManifests' as it is up-to-date.
+Resolve mutations for :app:extractDeepLinksDebug (Thread[#3831,Execution worker Thread 2,5,main]) started.
+:app:extractDeepLinksDebug (Thread[#3833,Execution worker Thread 4,5,main]) started.
+
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+Caching disabled for task ':app:extractDeepLinksDebug' because:
+  Build cache is disabled
+Skipping task ':app:extractDeepLinksDebug' as it is up-to-date.
+Resolve mutations for :app:processDebugMainManifest (Thread[#3833,Execution worker Thread 4,5,main]) started.
+:app:processDebugMainManifest (Thread[#3841,Execution worker Thread 12,5,main]) started.
+
+> Task :app:processDebugMainManifest UP-TO-DATE
+Caching disabled for task ':app:processDebugMainManifest' because:
+  Build cache is disabled
+Skipping task ':app:processDebugMainManifest' as it is up-to-date.
+Resolve mutations for :app:processDebugManifest (Thread[#3841,Execution worker Thread 12,5,main]) started.
+:app:processDebugManifest (Thread[#3834,Execution worker Thread 5,5,main]) started.
+
+> Task :app:processDebugManifest UP-TO-DATE
+Caching disabled for task ':app:processDebugManifest' because:
+  Build cache is disabled
+Skipping task ':app:processDebugManifest' as it is up-to-date.
+Resolve mutations for :app:processDebugManifestForPackage (Thread[#3834,Execution worker Thread 5,5,main]) started.
+:app:processDebugManifestForPackage (Thread[#3837,Execution worker Thread 8,5,main]) started.
+
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+Custom actions are attached to task ':app:processDebugManifestForPackage'.
+Caching disabled for task ':app:processDebugManifestForPackage' because:
+  Build cache is disabled
+Skipping task ':app:processDebugManifestForPackage' as it is up-to-date.
+Resolve mutations for :app:processDebugResources (Thread[#3837,Execution worker Thread 8,5,main]) started.
+:app:processDebugResources (Thread[#3837,Execution worker Thread 8,5,main]) started.
+
+> Task :app:processDebugResources UP-TO-DATE
+Caching disabled for task ':app:processDebugResources' because:
+  Build cache is disabled
+Skipping task ':app:processDebugResources' as it is up-to-date.
+Resolve mutations for :app:kspDebugKotlin (Thread[#3837,Execution worker Thread 8,5,main]) started.
+:app:kspDebugKotlin (Thread[#3837,Execution worker Thread 8,5,main]) started.
+
+> Task :app:kspDebugKotlin
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+Caching disabled for task ':app:kspDebugKotlin' because:
+  Build cache is disabled
+Task ':app:kspDebugKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':app:kspDebugKotlin'.
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\debug\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+file or directory 'E:\github\Mi\app\src\main\kotlin', not found
+file or directory 'E:\github\Mi\app\src\debug\java', not found
+Kotlin source files: E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\db\dao\Daos.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\db\entity\Entities.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\db\MiDatabase.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\local\preferences\AppPreferences.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\remote\discord\DiscordWebSocketClient.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\remote\google\GoogleApis.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\remote\lmstudio\LMStudioApi.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\repository\AiRepository.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\repository\GoogleRepositories.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\data\repository\Repositories.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\di\DatabaseModule.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\di\NetworkModule.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\domain\model\Models.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\MainActivity.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\MiApplication.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\receiver\BootReceiver.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\service\DiscordService.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\service\TimerForegroundService.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\DraggableWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\AiWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\CalendarTodoWidgets.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\ClockWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\DailyTaskWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\DiscordWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\ImageWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\MemoWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\ProgressWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\TimerWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\components\widgets\WebhookButtonWidget.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\navigation\AppNavigation.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\screens\DashboardScreen.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\screens\settings\SettingsScreen.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\theme\Color.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\theme\Theme.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\theme\Type.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\AiViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\DailyTaskViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\DashboardViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\DiscordViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\GoogleViewModels.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\MemoViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\SettingsViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\TimerViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\ui\viewmodel\WebhookViewModel.kt, E:\github\Mi\app\src\main\java\com\nbks\mi\worker\ScreenDimWorker.kt
+Java source files: E:\github\Mi\app\build\generated\source\buildConfig\debug\com\nbks\mi\BuildConfig.java
+Script source files: 
+Script file extensions: 
+[KOTLIN] Kotlin compilation 'jdkHome' argument: null
+i: [ksp] loaded provider(s): [dagger.hilt.processor.internal.uninstallmodules.KspUninstallModulesProcessor$Provider, dagger.hilt.android.processor.internal.customtestapplication.KspCustomTestApplicationProcessor$Provider, dagger.hilt.processor.internal.aliasof.KspAliasOfProcessor$Provider, dagger.hilt.android.processor.internal.viewmodel.KspViewModelProcessor$Provider, dagger.hilt.processor.internal.earlyentrypoint.KspEarlyEntryPointProcessor$Provider, dagger.hilt.processor.internal.generatesrootinput.KspGeneratesRootInputProcessor$Provider, dagger.hilt.android.processor.internal.androidentrypoint.KspAndroidEntryPointProcessor$Provider, dagger.hilt.processor.internal.originatingelement.KspOriginatingElementProcessor$Provider, dagger.hilt.android.processor.internal.bindvalue.KspBindValueProcessor$Provider, dagger.hilt.processor.internal.definecomponent.KspDefineComponentProcessor$Provider, dagger.hilt.processor.internal.root.KspRootProcessor$Provider, dagger.hilt.processor.internal.aggregateddeps.KspAggregatedDepsProcessor$Provider, dagger.hilt.processor.internal.root.KspComponentTreeDepsProcessor$Provider, androidx.hilt.AndroidXHiltKspProcessor$Provider, androidx.room.RoomKspProcessor$Provider, dagger.internal.codegen.KspComponentProcessor$Provider]
+e: [ksp] InjectProcessingStep was unable to process 'DailyTaskRepository(error.NonExistentClass)' because 'error.NonExistentClass' could not be resolved.
+
+Dependency trace:
+    => element (CLASS): com.nbks.mi.data.repository.DailyTaskRepository
+    => element (CONSTRUCTOR): DailyTaskRepository(error.NonExistentClass)
+    => type (EXECUTABLE constructor): (error.NonExistentClass)void
+    => type (ERROR parameter type): error.NonExistentClass
+
+If type 'error.NonExistentClass' is a generated type, check above for compilation errors that may have prevented the type from being generated. Otherwise, ensure that type 'error.NonExistentClass' is on your classpath.
+e: [ksp] InjectProcessingStep was unable to process 'WebhookButtonRepository(error.NonExistentClass)' because 'error.NonExistentClass' could not be resolved.
+
+Dependency trace:
+    => element (CLASS): com.nbks.mi.data.repository.WebhookButtonRepository
+    => element (CONSTRUCTOR): WebhookButtonRepository(error.NonExistentClass)
+    => type (EXECUTABLE constructor): (error.NonExistentClass)void
+    => type (ERROR parameter type): error.NonExistentClass
+
+If type 'error.NonExistentClass' is a generated type, check above for compilation errors that may have prevented the type from being generated. Otherwise, ensure that type 'error.NonExistentClass' is on your classpath.
+e: Error occurred in KSP, check log for detail
+Finished executing kotlin compiler using DAEMON strategy
+
+
+> Task :app:kspDebugKotlin FAILED
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:kspDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3s
+17 actionable tasks: 1 executed, 16 up-to-date
+Watched directory hierarchies: [E:\github\Mi]

@@ -126,7 +126,7 @@ data class ProgressData(
 data class AppSettings(
     val isDarkMode: Boolean = true,
     val useDynamicColor: Boolean = false,
-    val appLanguage: AppLanguage = AppLanguage.SYSTEM,
+    val appLanguage: AppLanguage = AppLanguage.ENGLISH,
     val clockStyle: ClockStyle = ClockStyle.DIGITAL,
     val wallpaperUri: String = "",
     val wallpaperDimAlpha: Float = 0.3f,

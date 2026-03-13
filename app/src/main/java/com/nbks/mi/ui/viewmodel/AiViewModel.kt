@@ -71,11 +71,11 @@ class AiViewModel @Inject constructor(
                     messageRepository.trimHistory(100)
                 },
                 onFailure = { e ->
-                    _error.value = e.message ?: "送信に失敗しました"
+                    _error.value = e.message ?: "Failed to send message"
                     messageRepository.saveMessage(
                         AiMessage(
                             role = "assistant",
-                            content = "エラー: ${e.message ?: "不明なエラー"}",
+                            content = "Error: ${e.message ?: "Unknown error"}",
                             timestamp = LocalDateTime.now(),
                             isError = true,
                         )

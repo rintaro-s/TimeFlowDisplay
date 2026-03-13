@@ -46,7 +46,7 @@ class MemoViewModel @Inject constructor(
         viewModelScope.launch {
             memoRepository.saveMemo(
                 editing.copy(
-                    title = title.trim().ifBlank { "無題" },
+                    title = title.trim().ifBlank { "Untitled" },
                     content = content,
                     colorIndex = colorIndex,
                     updatedAt = LocalDateTime.now(),

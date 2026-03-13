@@ -121,7 +121,7 @@ fun DraggableWidget(
             ) {
                 Icon(
                     Icons.Default.Close,
-                    contentDescription = "削除",
+                    contentDescription = "Delete",
                     tint = MaterialTheme.colorScheme.onError,
                     modifier = Modifier.size(16.dp),
                 )
@@ -150,7 +150,7 @@ fun DraggableWidget(
             ) {
                 Icon(
                     Icons.Default.OpenInFull,
-                    contentDescription = "リサイズ",
+                    contentDescription = "Resize",
                     tint = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .size(14.dp)

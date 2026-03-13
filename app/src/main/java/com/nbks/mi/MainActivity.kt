@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nbks.mi.domain.model.AppLanguage
 import com.nbks.mi.ui.navigation.AppNavigation
 import com.nbks.mi.ui.theme.LocalIsJa
 import com.nbks.mi.ui.theme.MiTheme
@@ -22,11 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsViewModel: SettingsViewModel = hiltViewModel()
             val settings by settingsViewModel.settings.collectAsStateWithLifecycle()
-            val isJa = when (settings.appLanguage) {
-                AppLanguage.SYSTEM -> java.util.Locale.getDefault().language == "ja"
-                AppLanguage.JAPANESE -> true
-                AppLanguage.ENGLISH -> false
-            }
+            val isJa = false
             CompositionLocalProvider(LocalIsJa provides isJa) {
                 MiTheme(
                     darkTheme = settings.isDarkMode,

@@ -75,7 +75,7 @@ fun ImageWidget(
             if (imageUri != null) {
                 AsyncImage(
                     model = imageUri,
-                    contentDescription = "配置画像",
+                    contentDescription = "Placed image",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit,
                 )
@@ -107,7 +107,7 @@ fun ImageWidget(
                         .padding(8.dp),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.85f),
                 ) {
-                    Icon(Icons.Default.Edit, contentDescription = "画像変更",
+                    Icon(Icons.Default.Edit, contentDescription = "Change image",
                         modifier = Modifier.size(16.dp))
                 }
             }

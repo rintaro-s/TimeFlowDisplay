@@ -149,8 +149,8 @@ private fun WebhookButtonItem(
             shape = RoundedCornerShape(10.dp),
         ) {
             when (localFeedback) {
-                true -> Icon(Icons.Default.Check, contentDescription = "成功", modifier = Modifier.size(18.dp))
-                false -> Icon(Icons.Default.Close, contentDescription = "失敗", modifier = Modifier.size(18.dp))
+                true -> Icon(Icons.Default.Check, contentDescription = "Success", modifier = Modifier.size(18.dp))
+                false -> Icon(Icons.Default.Close, contentDescription = "Failed", modifier = Modifier.size(18.dp))
                 else -> Text(button.label, style = MaterialTheme.typography.labelMedium, maxLines = 2)
             }
         }
@@ -164,7 +164,7 @@ private fun WebhookButtonItem(
                     .clip(RoundedCornerShape(10.dp))
                     .background(MaterialTheme.colorScheme.error),
             ) {
-                Icon(Icons.Default.Close, contentDescription = "削除",
+                Icon(Icons.Default.Close, contentDescription = "Delete",
                     modifier = Modifier.size(12.dp), tint = MaterialTheme.colorScheme.onError)
             }
         }

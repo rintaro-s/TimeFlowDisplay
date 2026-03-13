@@ -125,7 +125,7 @@ private fun MemoCard(
             ) {
                 Icon(
                     Icons.Default.Close,
-                    contentDescription = "削除",
+                    contentDescription = "Delete",
                     modifier = Modifier.size(14.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                 )

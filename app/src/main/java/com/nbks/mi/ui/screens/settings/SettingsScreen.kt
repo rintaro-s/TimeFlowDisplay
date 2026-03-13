@@ -372,7 +372,7 @@ fun LMStudioSettings(
                     Icon(Icons.Default.Info, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.tertiary)
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "LMStudio (https://lmstudio.ai) を起動し，OpenAI互換サーバーを有効にしてください。",
+                        "Start LMStudio (https://lmstudio.ai) and enable the OpenAI-compatible server.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onTertiaryContainer,
                     )
@@ -380,14 +380,14 @@ fun LMStudioSettings(
             }
         }
         item {
-            SettingsCategoryLabel("接続設定")
+            SettingsCategoryLabel("Connection")
             OutlinedTextField(
                 value = urlText,
                 onValueChange = {
                     urlText = it
                     onUrlChange(it)
                 },
-                label = { Text("サーバーURL") },
+                label = { Text("Server URL") },
                 placeholder = { Text("http://192.168.1.x:1234") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
@@ -400,7 +400,7 @@ fun LMStudioSettings(
                     modelText = it
                     onModelChange(it)
                 },
-                label = { Text("モデル名") },
+                label = { Text("Model") },
                 placeholder = { Text("local-model") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
@@ -413,7 +413,7 @@ fun LMStudioSettings(
                     maxTokensText = text
                     text.toIntOrNull()?.let { onMaxTokensChange(it) }
                 },
-                label = { Text("最大トークン数") },
+                label = { Text("Max Tokens") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
             )
@@ -444,8 +444,8 @@ fun ScheduleSettings(
     ) {
         item {
             SettingsToggleItem(
-                title = "スケジュール画面制御を有効化",
-                subtitle = "設定した時間帯に画面を暗くします",
+                title = "Enable schedule-based dimming",
+                subtitle = "Dim the screen during configured time ranges",
                 icon = Icons.Default.BrightnessLow,
                 checked = settings.scheduleScreenDim,
                 onCheckedChange = onScheduleScreenDimChange,
@@ -454,21 +454,21 @@ fun ScheduleSettings(
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    "スケジュール",
+                    "Schedules",
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier.weight(1f),
                 )
                 TextButton(onClick = { showAddDialog = true }) {
                     Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("追加")
+                    Text("Add")
                 }
             }
         }
         if (schedules.isEmpty()) {
             item {
                 Text(
-                    "スケジュールはありません",
+                    "No schedules",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 )
@@ -500,7 +500,7 @@ private fun ScheduleItem(
     onToggle: () -> Unit,
     onDelete: () -> Unit,
 ) {
-    val dayLabels = listOf("月", "火", "水", "木", "金", "土", "日")
+    val dayLabels = listOf("M", "T", "W", "T", "F", "S", "S")
     val activeDays = (0..6).filter { schedule.dayOfWeekBitmask and (1 shl it) != 0 }
         .joinToString("") { dayLabels[it] }
 
@@ -530,11 +530,11 @@ private fun ScheduleItem(
                     Text(schedule.label, style = MaterialTheme.typography.labelMedium)
                 }
                 Text(
-                    "%02d:%02d 〜 %02d:%02d   明るさ: %d%%  [%s]".format(
+                    "%02d:%02d - %02d:%02d   Brightness: %d%%  [%s]".format(
                         schedule.startHour, schedule.startMinute,
                         schedule.endHour, schedule.endMinute,
                         (schedule.brightness * 100).toInt(),
-                        if (activeDays.length == 7) "毎日" else activeDays,
+                        if (activeDays.length == 7) "Every day" else activeDays,
                     ),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -544,7 +544,7 @@ private fun ScheduleItem(
             IconButton(onClick = onDelete, modifier = Modifier.size(32.dp)) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "削除",
+                    contentDescription = "Delete",
                     tint = MaterialTheme.colorScheme.error.copy(alpha = 0.6f),
                     modifier = Modifier.size(16.dp),
                 )
@@ -560,7 +560,7 @@ private fun ScheduleDialog(
     onDismiss: () -> Unit,
 ) {
     val context = LocalContext.current
-    val dayLabels = listOf("月", "火", "水", "木", "金", "土", "日")
+    val dayLabels = listOf("M", "T", "W", "T", "F", "S", "S")
     var label by remember { mutableStateOf(schedule?.label ?: "") }
     var startHour by remember { mutableIntStateOf(schedule?.startHour ?: 22) }
     var startMinute by remember { mutableIntStateOf(schedule?.startMinute ?: 0) }
@@ -571,18 +571,18 @@ private fun ScheduleDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("スケジュールを追加") },
+        title = { Text("Add Schedule") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 OutlinedTextField(
                     value = label,
                     onValueChange = { label = it },
-                    label = { Text("ラベル (任意)") },
+                    label = { Text("Label (optional)") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                 )
                 // 曜日選択
-                Text("曜日", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Days", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -609,7 +609,7 @@ private fun ScheduleDialog(
                         },
                         modifier = Modifier.weight(1f),
                     ) {
-                        Text("開始: %02d:%02d".format(startHour, startMinute))
+                        Text("Start: %02d:%02d".format(startHour, startMinute))
                     }
                     OutlinedButton(
                         onClick = {
@@ -619,10 +619,10 @@ private fun ScheduleDialog(
                         },
                         modifier = Modifier.weight(1f),
                     ) {
-                        Text("終了: %02d:%02d".format(endHour, endMinute))
+                        Text("End: %02d:%02d".format(endHour, endMinute))
                     }
                 }
-                Text("明るさ: ${(brightness * 100).toInt()}% (0%=真っ黒)")
+                Text("Brightness: ${(brightness * 100).toInt()}% (0% = black)")
                 Slider(
                     value = brightness,
                     onValueChange = { brightness = it },
@@ -645,11 +645,11 @@ private fun ScheduleDialog(
                     )
                 )
             }) {
-                Text("保存")
+                Text("Save")
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("キャンセル") }
+            TextButton(onClick = onDismiss) { Text("Cancel") }
         },
     )
 }

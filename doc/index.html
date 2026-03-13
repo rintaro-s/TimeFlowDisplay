@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +8,21 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: 細字の明朝体とゴシック体を読み込み -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons (極細のアイコンを使用) -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* ベーススタイリング */
+        /* Base styling */
         body {
             font-family: 'Noto Sans JP', sans-serif;
             background-color: #ffffff;
             color: #333333;
-            /* 初期状態はスクロール不可 */
+            /* Locked until intro completes */
             overflow: hidden; 
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -30,6 +30,48 @@
 
         .font-serif {
             font-family: 'Noto Serif JP', serif;
+        }
+        .hero-panel {
+            position: relative;
+            padding: clamp(14px, 2vw, 22px) clamp(18px, 3vw, 34px);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            backdrop-filter: blur(16px) saturate(140%);
+            box-shadow: 0 20px 70px rgba(13, 18, 55, 0.25);
+        }
+        .hero-title {
+            position: relative;
+            color: rgba(26, 34, 58, 0.95);
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.45);
+            overflow: hidden;
+        }
+        .hero-title .title-text {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-title::after {
+            content: "";
+            position: absolute;
+            top: 12%;
+            left: -30%;
+            width: 160%;
+            height: 28%;
+            transform: rotate(-12deg);
+            background: linear-gradient(90deg, rgba(120, 209, 255, 0), rgba(116, 220, 255, 0.85), rgba(120, 209, 255, 0));
+            mix-blend-mode: screen;
+            animation: titleSweep 5.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .hero-subtitle {
+            color: rgba(35, 45, 72, 0.9);
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+        }
+        @keyframes titleSweep {
+            0% { transform: translateX(-60%) rotate(-12deg); opacity: 0; }
+            18% { opacity: 0.95; }
+            50% { transform: translateX(30%) rotate(-12deg); opacity: 0.9; }
+            100% { transform: translateX(90%) rotate(-12deg); opacity: 0; }
         }
 
         /* カスタムの極細線 */
@@ -279,10 +321,242 @@
             color: #4c4f6c;
             line-height: 2;
         }
+        .floating-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+            gap: 24px;
+            align-items: start;
+            padding-top: 18vh;
+        }
+        .preview-cluster {
+            position: relative;
+            min-height: 1200px;
+        }
+        .preview-sidebar {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            padding-top: 72px;
+        }
+        .floating-widget .mini-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            color: #606684;
+            text-transform: uppercase;
+        }
+        .mini-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #6f8bff, #53d8ff);
+        }
+        .schedule-lines {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .schedule-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(108, 119, 163, 0.16);
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            color: #4d5370;
+        }
+        .app-widget {
+            position: relative;
+            border-radius: 24px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(111, 122, 170, 0.18);
+            box-shadow: 0 28px 80px rgba(20, 20, 45, 0.12);
+            backdrop-filter: blur(16px);
+            transition: transform 0.6s ease, box-shadow 0.6s ease, border-color 0.6s ease;
+        }
+        .app-widget::after {
+            content: attr(data-widget);
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            font-size: 10px;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: rgba(37, 42, 77, 0.25);
+        }
+        .app-widget.is-active {
+            transform: translateY(-6px);
+            box-shadow: 0 34px 100px rgba(24, 28, 60, 0.18);
+            border-color: rgba(100, 123, 215, 0.36);
+        }
+        .app-status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .app-status-grid > div {
+            border-radius: 16px;
+            background: rgba(244, 246, 255, 0.92);
+            padding: 14px 12px;
+        }
+        .app-status-grid p:first-child {
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #8a8fa9;
+            margin-bottom: 6px;
+        }
+        .app-status-grid p:last-child {
+            font-size: 16px;
+            letter-spacing: 0.08em;
+            color: #262c4d;
+        }
+        .app-progress-track {
+            position: relative;
+            width: 100%;
+            height: 12px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(72, 82, 128, 0.12);
+            margin-top: 14px;
+        }
+        .app-progress-fill {
+            height: 100%;
+            width: 52%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #7c8fff, #59d6ff);
+            transition: width 0.9s ease;
+        }
+        .app-progress-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #67708f;
+        }
+        .app-ai-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .app-ai-msg {
+            max-width: 88%;
+            border-radius: 16px;
+            padding: 12px 14px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #45506f;
+            background: rgba(243, 246, 255, 0.95);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .app-ai-msg.user {
+            align-self: flex-end;
+            background: rgba(117, 120, 249, 0.16);
+            color: #2b2e73;
+        }
+        .app-ai-msg.bot {
+            align-self: flex-start;
+        }
+        .app-ai-msg.is-pulse {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(41, 32, 92, 0.16);
+        }
+        .app-task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .app-task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(247, 249, 255, 0.92);
+            color: #44506c;
+            font-size: 13px;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+        .app-task.is-done {
+            background: rgba(161, 237, 212, 0.34);
+            color: #1f664f;
+        }
+        .app-webhook-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .app-webhook-btn {
+            padding: 14px 12px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: white;
+            background: linear-gradient(135deg, #8f7cff, #5acffb);
+            box-shadow: 0 18px 30px rgba(69, 85, 167, 0.16);
+        }
+        .app-webhook-btn:nth-child(2) { background: linear-gradient(135deg, #ffb38f, #ff5a76); }
+        .app-webhook-btn:nth-child(3) { background: linear-gradient(135deg, #68e3c9, #69a9ff); }
+        .app-webhook-btn:nth-child(4) { background: linear-gradient(135deg, #ffd36b, #ff7d5f); }
+        .shot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+        .shot-card {
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(110, 122, 165, 0.2);
+            box-shadow: 0 16px 50px rgba(20, 25, 50, 0.14);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .shot-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .download-band {
+            position: relative;
+            margin-top: 16px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            border: 1px solid rgba(113, 133, 193, 0.3);
+            background: linear-gradient(120deg, rgba(237, 247, 255, 0.95), rgba(245, 250, 255, 0.9));
+        }
         @media (max-width: 900px) {
             .floating-layer {
                 min-height: auto;
                 padding: 80px 24px;
+            }
+            .floating-grid {
+                grid-template-columns: 1fr;
+                padding-top: 120px;
+            }
+            .preview-cluster {
+                min-height: auto;
+            }
+            .preview-sidebar {
+                padding-top: 0;
             }
             .floating-widget {
                 position: relative;
@@ -293,34 +567,30 @@
                 margin-bottom: 24px;
                 min-width: auto;
             }
+            .app-status-grid,
+            .app-webhook-grid,
+            .shot-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body class="selection:bg-gray-100 selection:text-gray-900">
 
-    <!-- 
-      ====================================================
-      1. ヒーローセクション (動画・画像・キャッチコピー)
-      ==================================================== 
-    -->
+        <!-- Hero section -->
     <header class="relative w-full h-screen overflow-hidden bg-white">
         
-        <!-- ▼ 画像 (動画の最後のフレームと同じ画像を指定してください) ▼ -->
-        <!-- デモ用プレースホルダー画像 -->
+        <!-- Cover image -->
         <img 
             src="./video/image.jpg" 
             alt="Background end frame" 
             class="absolute inset-0 w-full h-full object-cover z-0"
         >
 
-        <!-- テキストの視認性を上げるためのごく薄い白のオーバーレイ -->
+        <!-- Light overlay for text contrast -->
         <div class="absolute inset-0 bg-white/30 z-10 mix-blend-overlay"></div>
 
-        <!-- ▼ 動画 ▼ -->
-        <!-- 
-          ブラウザの自動再生制限を回避するため、必ず muted と playsinline を入れます。
-          デモ用のプレースホルダー動画 (約15秒) を設定しています。
-        -->
+                <!-- Intro video -->
         <video 
             id="intro-video" 
             class="absolute inset-0 w-full h-full object-cover z-30 transition-opacity duration-[2500ms] ease-in-out" 
@@ -329,17 +599,19 @@
             <source src="./video/intro.mp4" type="video/mp4">
         </video>
 
-        <!-- ▼ キャッチコピー (初期状態は透明) ▼ -->
+        <!-- Intro copy -->
         <div id="hero-content" class="absolute inset-0 z-20 flex flex-col items-center justify-center opacity-0 transition-all duration-[2500ms] ease-out transform translate-y-8">
-            <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl tracking-[0.2em] text-gray-900 mb-4 font-light text-center leading-tight drop-shadow-sm">
-                Mi Dashboard
-            </h1>
-            <p class="text-xs md:text-sm tracking-[0.2em] text-gray-600 font-light uppercase text-center">
-                Ambient productivity hub for wall-mounted Android tablets
-            </p>
+            <div class="hero-panel">
+                <h1 class="hero-title font-serif text-3xl md:text-5xl lg:text-6xl tracking-[0.2em] mb-4 font-light text-center leading-tight">
+                    <span class="title-text">Mi Dashboard</span>
+                </h1>
+                <p class="hero-subtitle text-xs md:text-sm tracking-[0.2em] font-light uppercase text-center">
+                    Ambient productivity hub for wall-mounted Android tablets
+                </p>
+            </div>
         </div>
 
-        <!-- スクロールインジケーター (キャッチコピーと共に表示) -->
+        <!-- Scroll indicator -->
         <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center opacity-0 transition-opacity duration-[3000ms] ease-in delay-1000">
             <span class="text-[10px] tracking-[0.3em] text-gray-500 mb-4 uppercase font-light">Scroll</span>
             <div class="w-[1px] h-12 bg-gray-300 overflow-hidden">
@@ -357,28 +629,23 @@
     </header>
 
 
-    <!-- 
-      ====================================================
-      2. メインコンテンツ (スクロール後に表示される内容)
-      ==================================================== 
-      ※初期状態はopacity-0で見えなくしておき、動画終了後にフェードイン
-    -->
+        <!-- Main content -->
     <main id="main-content" class="opacity-0 transition-opacity duration-[2000ms] ease-in-out">
         
         <!-- Concept Section -->
         <section class="py-32 md:py-48 px-6 max-w-4xl mx-auto text-center">
             <h2 class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-light text-gray-800 mb-12 fade-in-up">
-                壁掛けタブレットを、あなただけのワークステーションに。
+                Turn your wall-mounted tablet into a focused workstation.
             </h2>
             <div class="space-y-8 text-sm md:text-base text-gray-500 font-light tracking-[0.1em] leading-loose fade-in-up delay-200">
                 <p>
-                    Mi Dashboard は Jetpack Compose で作られた常設ダッシュボード。<br>
-                    時計・カレンダー・メモ・タイマー・AI チャット・Webhook ボタンなど、<br class="hidden md:block">
-                    日々のワークフローに必要なウィジェットを 1 つの画面に集約します。
+                    Mi Dashboard is an always-on Android tablet dashboard built with Jetpack Compose.<br>
+                    Clock, calendar, memos, timers, daily alarms, AI chat, webhooks, and image widgets can be combined<br class="hidden md:block">
+                    into one practical control surface.
                 </p>
                 <p>
-                    レイアウトはドラッグ&ドロップで編集し、Room と DataStore に保存。<br>
-                    暗転スケジュールや壁紙ディムで、昼夜を問わず視認性の高い情報スペースを実現します。
+                    Edit mode lets you reposition and resize widgets, with layouts persisted through Room and DataStore.<br>
+                    Wallpaper dimming, language, keep-screen-on, and schedule behavior are controlled in settings.
                 </p>
             </div>
         </section>
@@ -397,9 +664,9 @@
                     <div class="w-16 h-16 flex items-center justify-center rounded-full border border-gray-100 mb-8 bg-gray-50/50">
                         <i data-lucide="feather" stroke-width="1" class="w-6 h-6 text-gray-600"></i>
                     </div>
-                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">ドラッグ&ドロップ編集</h3>
+                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">Editable Widget Board</h3>
                     <p class="text-xs text-gray-500 font-light tracking-[0.08em] leading-relaxed">
-                        時計、メモ、タイマー、画像などのウィジェットを自由に配置。<br>サイズや不透明度も即座に調整できます。
+                        Rebuild your layout in edit mode with drag, resize, and quick adjustments.<br>Opacity, wallpaper, and clock style update instantly.
                     </p>
                 </div>
 
@@ -408,9 +675,9 @@
                     <div class="w-16 h-16 flex items-center justify-center rounded-full border border-gray-100 mb-8 bg-gray-50/50">
                         <i data-lucide="wind" stroke-width="1" class="w-6 h-6 text-gray-600"></i>
                     </div>
-                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">ローカル AI & Webhook</h3>
+                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">AI (LMStudio) & Webhook</h3>
                     <p class="text-xs text-gray-500 font-light tracking-[0.08em] leading-relaxed">
-                        LMStudio 互換 API と接続して AI チャットを実現。<br>Webhook ボタンで Discord などの自動化をトリガー。
+                        Configure any LMStudio-compatible endpoint for AI chat.<br>Trigger saved webhook payloads with a single tap.
                     </p>
                 </div>
 
@@ -419,9 +686,9 @@
                     <div class="w-16 h-16 flex items-center justify-center rounded-full border border-gray-100 mb-8 bg-gray-50/50">
                         <i data-lucide="sliders-horizontal" stroke-width="1" class="w-6 h-6 text-gray-600"></i>
                     </div>
-                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">時間帯オートディム</h3>
+                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">Scheduled Screen Dim</h3>
                     <p class="text-xs text-gray-500 font-light tracking-[0.08em] leading-relaxed">
-                        WorkManager とスケジュール設定で、<br>時間帯ごとの画面暗転や通知モードを自動制御します。
+                        WorkManager checks your schedule and applies dim behavior automatically.<br>Useful for night mode and low-light spaces.
                     </p>
                 </div>
 
@@ -431,54 +698,79 @@
         <!-- Floating App Preview Section -->
         <section class="floating-preview fade-in-up" id="app-preview-section">
             <div class="floating-layer">
-                <article class="floating-widget" data-widget="WidgetType.CLOCK" style="--x:16%; --y:28%; --r:-4deg;">
-                    <small>AppSettings.clockStyle = DIGITAL</small>
-                    <h4>時計 / Clock</h4>
-                    <div class="clock-face" id="floatingClock">12:34</div>
-                    <div class="clock-meta">
-                        <span id="floatingDate">THU · MAR 13</span>
-                        <span>KeepScreenOn = true</span>
-                    </div>
-                    <p class="wallpaper-note">WallpaperDimAlpha = 0.30 · DynamicColor = Off</p>
-                </article>
+                <div class="floating-caption">
+                    <p>Jetpack Compose / Material 3</p>
+                    <h3>Readable at distance,
+                        practical in daily use.</h3>
+                    <span>Clock, memo, progress, AI, schedule, webhook</span>
+                </div>
 
-                <article class="floating-widget" data-widget="WidgetType.CALENDAR" style="--x:38%; --y:18%; --r:2deg;">
-                    <small>ScreenScheduleWorker</small>
-                    <h4>スケジュール / Screen dim</h4>
-                    <div class="wallpaper-note">
-                        月~金 · 22:00 → 06:00 · brightness 25%<br>
-                        土~日 · 00:30 → 08:30 · brightness 10%
-                                </div>
-                                <div>
-                                    <p class="text-gray-400">Tasks</p>
-                                    <p class="text-gray-900" id="taskCount">7 active</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-400">Webhook</p>
-                                    <p class="text-gray-900">3 triggers</p>
-                                </div>
+                <div class="floating-grid">
+                    <div class="preview-cluster">
+                        <article class="floating-widget is-hot" data-widget="WidgetType.CLOCK" style="--x:23%; --y:24%; --r:-4deg; --delay:1s;">
+                            <small>Clock widget / digital</small>
+                            <h4>Clock</h4>
+                            <div class="clock-face" id="previewClock">12:34</div>
+                            <div class="clock-meta">
+                                <span id="previewDate">THU MAR 13</span>
+                                <span>Keep screen on</span>
                             </div>
+                            <p class="wallpaper-note">Digital or analog modes, wallpaper dim, and language-aware labels.</p>
+                        </article>
+
+                        <article class="floating-widget" data-widget="WidgetType.SCHEDULE" style="--x:56%; --y:18%; --r:2deg; --delay:4s;">
+                            <small>Screen dim schedule</small>
+                            <h4>Schedule</h4>
+                            <div class="schedule-lines">
+                                <div class="schedule-row"><span>Weekdays</span><span>22:00 → 06:00</span></div>
+                                <div class="schedule-row"><span>Weekend</span><span>00:30 → 08:30</span></div>
+                            </div>
+                            <div class="mini-label"><span class="mini-dot"></span>WorkManager applies dim state by active slot</div>
+                        </article>
+
+                        <article class="floating-widget" data-widget="WidgetType.MEMO" style="--x:30%; --y:56%; --r:3deg; --delay:2s;">
+                            <small>Memo board</small>
+                            <h4>Memo</h4>
+                            <div class="memo-stack">
+                                <div class="memo-card">Pinned: Prepare standup points before 09:45</div>
+                                <div class="memo-card">Shopping: HDMI adapter / extra power strip</div>
+                                <div class="memo-card">Switch LMStudio model to evening profile</div>
+                            </div>
+                            <div class="mini-label"><span class="mini-dot"></span><span id="memoCount">3 cards</span></div>
+                        </article>
+
+                        <article class="floating-widget" data-widget="WidgetType.PROGRESS" style="--x:62%; --y:58%; --r:-2deg; --delay:5s;">
+                            <small>Progress widget</small>
+                            <h4>Today Progress</h4>
+                            <div class="app-progress-track">
+                                <div class="app-progress-fill" id="appProgressFill"></div>
+                            </div>
+                            <div class="app-progress-meta">
+                                <span>Day flow</span>
+                                <span id="taskCount">6 active</span>
+                            </div>
+                            <p class="wallpaper-note">Track day/week/month/year progress at a glance.</p>
                         </article>
                     </div>
 
-                    <div class="app-preview-column">
+                    <div class="preview-sidebar">
                         <article class="app-widget" data-widget="ai">
                             <div class="flex justify-between items-center mb-4">
                                 <div>
                                     <p class="text-xs tracking-[0.35em] text-gray-500 uppercase">AI chat</p>
-                                    <p class="text-sm text-gray-400 tracking-[0.1em]">LMStudio endpoint</p>
+                                    <p class="text-sm text-gray-400 tracking-[0.1em]">LMStudio-compatible endpoint</p>
                                 </div>
-                                <span class="text-[10px] tracking-[0.4em] text-emerald-500 uppercase">Connected</span>
+                                <span class="text-[10px] tracking-[0.4em] text-emerald-500 uppercase">Optional</span>
                             </div>
                             <div class="app-ai-thread" id="aiThread">
-                                <div class="app-ai-msg user">今日の進捗をまとめて。</div>
-                                <div class="app-ai-msg bot">ダッシュボードに配置された 5 つのウィジェットを確認しました。メモが 3 件更新されています。</div>
-                                <div class="app-ai-msg user">Webhook で Discord に送って。</div>
-                                <div class="app-ai-msg bot">"Daily standup" チャンネルへ送信しました。何か追記しますか？</div>
+                                <div class="app-ai-msg user">Create a compact template for my daily priorities.</div>
+                                <div class="app-ai-msg bot">Sure. I will use Priority / Deadline / Next Action as a 3-line format.</div>
+                                <div class="app-ai-msg user">Add one quick example.</div>
+                                <div class="app-ai-msg bot">Example: Update proposal / 18:00 / finish outline first.</div>
                             </div>
                             <div class="mt-6 flex items-center justify-between text-[11px] text-gray-500 tracking-[0.2em] uppercase">
-                                <span>Tokens 512 / 2048</span>
-                                <span>Latency 120ms</span>
+                                <span>Voice input (device support)</span>
+                                <span>History-based chat</span>
                             </div>
                         </article>
 
@@ -489,34 +781,51 @@
                             </div>
                             <div class="app-task-list" id="taskList">
                                 <div class="app-task">
-                                    <span>Water plants</span>
+                                    <span>Morning device check</span>
                                     <span>07:30</span>
                                 </div>
                                 <div class="app-task">
-                                    <span>Deep work session</span>
+                                    <span>Deep work timer</span>
                                     <span>09:00</span>
                                 </div>
                                 <div class="app-task">
-                                    <span>Stretching timer</span>
-                                    <span>11:00</span>
+                                    <span>Webhook sync</span>
+                                    <span>14:30</span>
                                 </div>
                                 <div class="app-task">
-                                    <span>Sync webhook logs</span>
-                                    <span>14:30</span>
+                                    <span>Daily memo review</span>
+                                    <span>19:00</span>
                                 </div>
                             </div>
                         </article>
 
-                        <article class="app-widget" data-widget="webhook">
+                        <article class="app-widget" data-widget="controls">
                             <div class="flex justify-between items-center mb-4">
-                                <p class="text-xs tracking-[0.3em] text-gray-500 uppercase">Webhook buttons</p>
-                                <span class="text-[10px] tracking-[0.35em] text-gray-400">Tap to trigger</span>
+                                <div>
+                                    <p class="text-xs tracking-[0.3em] text-gray-500 uppercase">Controls</p>
+                                    <p class="text-sm text-gray-400 tracking-[0.1em]">Webhook / settings / image</p>
+                                </div>
+                                <span class="text-[10px] tracking-[0.35em] text-gray-400">Saved on device</span>
                             </div>
                             <div class="app-webhook-grid">
-                                <div class="app-webhook-btn">Discord Standup</div>
-                                <div class="app-webhook-btn">Lights Scene</div>
-                                <div class="app-webhook-btn">Sync AI Notes</div>
+                                <div class="app-webhook-btn">Webhook A</div>
+                                <div class="app-webhook-btn">Scene B</div>
+                                <div class="app-webhook-btn">AI Notes</div>
                                 <div class="app-webhook-btn">Timer Reset</div>
+                            </div>
+                            <div class="app-status-grid">
+                                <div>
+                                    <p>Language</p>
+                                    <p>English</p>
+                                </div>
+                                <div>
+                                    <p>Wallpaper</p>
+                                    <p>Custom</p>
+                                </div>
+                                <div>
+                                    <p>Opacity</p>
+                                    <p>92%</p>
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -524,14 +833,34 @@
             </div>
         </section>
 
+        <section class="py-28 md:py-36 px-6 max-w-6xl mx-auto fade-in-up">
+            <div class="text-center mb-10">
+                <h2 class="font-serif text-2xl md:text-3xl tracking-[0.18em] font-light text-gray-800">Screenshots</h2>
+                <p class="mt-4 text-sm text-gray-500 tracking-[0.08em]">Real app screenshots from doc/images</p>
+            </div>
+            <div class="shot-grid">
+                <figure class="shot-card"><img src="./images/Screenshot_20260313-210237.png" alt="Mi Dashboard screenshot 1"></figure>
+                <figure class="shot-card"><img src="./images/Screenshot_20260313-210247.png" alt="Mi Dashboard screenshot 2"></figure>
+                <figure class="shot-card"><img src="./images/Screenshot_20260313-210313.png" alt="Mi Dashboard screenshot 3"></figure>
+                <figure class="shot-card"><img src="./images/Screenshot_20260313-210325.png" alt="Mi Dashboard screenshot 4"></figure>
+            </div>
+        </section>
+
         <!-- Call to Action -->
         <section class="py-32 px-6 flex flex-col items-center justify-center text-center fade-in-up">
             <h2 class="font-serif text-xl tracking-[0.2em] font-light text-gray-800 mb-6">
-                デスクにも壁にも、常設の情報ハブを。
+                Put a clear, always-on control board on your desk or wall.
             </h2>
             <p class="text-sm text-gray-500 tracking-[0.08em] mb-8 max-w-2xl">
-                GitHub でソースコードとセットアップ手順を確認し、LMStudio や Webhook と組み合わせた自分だけの作業ボードを構築してください。
+                Check the code and setup guide, then tailor the dashboard for your own workflow.
             </p>
+            <div class="download-band w-full max-w-3xl mb-8">
+                <p class="text-[11px] tracking-[0.26em] uppercase text-sky-700 mb-2">App Download</p>
+                <p class="text-sm text-gray-700 leading-relaxed">Download the latest Android build from the official release page:</p>
+                <a href="https://github.com/rintaro-s/TimeFlowDisplay/releases/tag/v1" target="_blank" rel="noopener noreferrer" class="inline-flex mt-3 items-center justify-center px-6 py-3 rounded-full bg-sky-600 text-white text-sm tracking-[0.12em] hover:bg-sky-500 transition-colors duration-300">
+                    Open Release v1
+                </a>
+            </div>
             <a href="../README.md" class="inline-flex items-center justify-center px-12 py-4 border border-gray-300 text-sm tracking-[0.2em] text-gray-600 font-light hover:bg-gray-50 hover:text-gray-900 transition-colors duration-500">
                 VIEW README
             </a>

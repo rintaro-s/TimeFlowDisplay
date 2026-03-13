@@ -126,6 +126,7 @@ data class ProgressData(
 data class AppSettings(
     val isDarkMode: Boolean = true,
     val useDynamicColor: Boolean = false,
+    val appLanguage: AppLanguage = AppLanguage.SYSTEM,
     val clockStyle: ClockStyle = ClockStyle.DIGITAL,
     val wallpaperUri: String = "",
     val wallpaperDimAlpha: Float = 0.3f,
@@ -141,6 +142,12 @@ data class AppSettings(
     val widgetOpacity: Float = 0.85f,
     val widgetBlur: Boolean = false,
 )
+
+enum class AppLanguage {
+    SYSTEM,
+    JAPANESE,
+    ENGLISH,
+}
 
 enum class ClockStyle { ANALOG, DIGITAL, BOTH }
 

@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.nbks.mi.domain.model.DailyTask
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 
 // ─────────────────────────────────────────────
 // 日課ウィジェット
@@ -27,15 +28,16 @@ fun DailyTaskWidget(
     modifier: Modifier = Modifier,
 ) {
     var showAddDialog by remember { mutableStateOf(false) }
+    val isJa = LocalIsJa.current
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "日課",
+            title = if (isJa) "日課" else "Daily Tasks",
             icon = Icons.Default.Repeat,
             isDarkTheme = isDarkTheme,
             actions = {
                 IconButton(onClick = { showAddDialog = true }, modifier = Modifier.size(24.dp)) {
-                    Icon(Icons.Default.Add, contentDescription = "追加", modifier = Modifier.size(14.dp))
+                    Icon(Icons.Default.Add, contentDescription = if (isJa) "追加" else "Add", modifier = Modifier.size(14.dp))
                 }
             }
         )
@@ -51,7 +53,7 @@ fun DailyTaskWidget(
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "＋ボタンで日課を追加",
+                        if (isJa) "＋ボタンで日課を追加" else "Tap ＋ to add tasks",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                     )
@@ -66,7 +68,7 @@ fun DailyTaskWidget(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        "$completed / ${tasks.size} 完了",
+                        if (isJa) "$completed / ${tasks.size} 完了" else "$completed / ${tasks.size} done",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -121,6 +123,7 @@ private fun DailyTaskItem(
     modifier: Modifier = Modifier,
 ) {
     var showDeleteConfirm by remember { mutableStateOf(false) }
+    val isJa = LocalIsJa.current
 
     Surface(
         modifier = modifier
@@ -162,13 +165,13 @@ private fun DailyTaskItem(
     if (showDeleteConfirm) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirm = false },
-            title = { Text("削除確認") },
-            text = { Text("「${task.title}」を削除しますか？") },
+            title = { Text(if (isJa) "削除確認" else "Delete?") },
+            text = { Text(if (isJa) "「${task.title}」を削除しますか？" else "Delete \"${task.title}\"?") },
             confirmButton = {
-                TextButton(onClick = { onDelete(); showDeleteConfirm = false }) { Text("削除") }
+                TextButton(onClick = { onDelete(); showDeleteConfirm = false }) { Text(if (isJa) "削除" else "Delete") }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteConfirm = false }) { Text("キャンセル") }
+                TextButton(onClick = { showDeleteConfirm = false }) { Text(if (isJa) "キャンセル" else "Cancel") }
             },
         )
     }
@@ -180,22 +183,23 @@ private fun AddDailyTaskDialog(
     onDismiss: () -> Unit,
 ) {
     var text by remember { mutableStateOf("") }
+    val isJa = LocalIsJa.current
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("日課を追加") },
+        title = { Text(if (isJa) "日課を追加" else "Add Daily Task") },
         text = {
             OutlinedTextField(
                 value = text,
                 onValueChange = { text = it },
-                placeholder = { Text("タスク名を入力") },
+                placeholder = { Text(if (isJa) "タスク名を入力" else "Task name") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
         },
         confirmButton = {
             TextButton(onClick = { if (text.isNotBlank()) onConfirm(text) },
-                enabled = text.isNotBlank()) { Text("追加") }
+                enabled = text.isNotBlank()) { Text(if (isJa) "追加" else "Add") }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("キャンセル") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(if (isJa) "キャンセル" else "Cancel") } },
     )
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.nbks.mi.domain.model.TimerPreset
 import com.nbks.mi.domain.model.TimerState
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 
 private val QUICK_PRESETS = listOf(
     "1m" to 60L, "3m" to 180L, "5m" to 300L,
@@ -38,7 +39,7 @@ fun TimerWidget(
     onDeletePreset: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val isJa = java.util.Locale.getDefault().language == "ja"
+    val isJa = LocalIsJa.current
     val isRunningOrPaused = timerState.isRunning || timerState.isPaused
 
     Column(modifier = modifier.fillMaxSize()) {

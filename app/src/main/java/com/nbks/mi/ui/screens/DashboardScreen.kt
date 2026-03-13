@@ -25,6 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.nbks.mi.domain.model.*
+import com.nbks.mi.ui.theme.LocalIsJa
 import com.nbks.mi.ui.components.*
 import com.nbks.mi.ui.components.widgets.*
 import com.nbks.mi.ui.viewmodel.*
@@ -406,7 +407,7 @@ private fun AddWidgetDialog(
     onAdd: (WidgetType) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val isJa = java.util.Locale.getDefault().language == "ja"
+    val isJa = LocalIsJa.current
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(if (isJa) "ウィジェットを追加" else "Add Widget") },
@@ -418,7 +419,7 @@ private fun AddWidgetDialog(
             ) {
                 itemsIndexed(WidgetType.entries) { _, type ->
                     ListItem(
-                        headlineContent = { Text(type.displayName) },
+                        headlineContent = { Text(if (isJa) type.jaName else type.enName) },
                         leadingContent = {
                             Icon(
                                 imageVector = widgetIcon(type),

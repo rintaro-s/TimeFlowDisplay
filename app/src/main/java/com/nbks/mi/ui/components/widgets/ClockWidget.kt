@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
 import com.nbks.mi.domain.model.ClockStyle
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 import kotlinx.coroutines.delay
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -35,6 +36,7 @@ fun ClockWidget(
     isDarkTheme: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val isJa = LocalIsJa.current
     var now by remember { mutableStateOf(LocalDateTime.now()) }
 
     // 毎秒更新
@@ -47,7 +49,7 @@ fun ClockWidget(
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "時計",
+            title = if (isJa) "時計" else "Clock",
             icon = Icons.Default.Schedule,
             isDarkTheme = isDarkTheme,
         )
@@ -80,8 +82,12 @@ private fun DigitalClock(
     now: LocalDateTime,
     modifier: Modifier = Modifier,
 ) {
+    val isJa = LocalIsJa.current
     val timeStr = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-    val dateStr = now.format(DateTimeFormatter.ofPattern("yyyy年M月d日 (E)"))
+    val dateStr = if (isJa)
+        now.format(DateTimeFormatter.ofPattern("yyyy年M月d日 (E)", java.util.Locale.JAPANESE))
+    else
+        now.format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy", java.util.Locale.ENGLISH))
 
     Column(
         modifier = modifier,

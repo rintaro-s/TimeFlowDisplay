@@ -3,8 +3,7 @@ package com.nbks.mi.ui.theme
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -62,6 +61,8 @@ private val LightColorScheme = lightColorScheme(
     outline = MiColors.OutlineLight,
     outlineVariant = MiColors.OutlineVariantLight,
 )
+
+val LocalIsJa = compositionLocalOf { false }
 
 @Composable
 fun MiTheme(

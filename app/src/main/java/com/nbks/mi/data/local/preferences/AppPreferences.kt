@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import com.nbks.mi.domain.model.AppLanguage
 import com.nbks.mi.domain.model.AppSettings
 import com.nbks.mi.domain.model.ClockStyle
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -25,6 +26,7 @@ class AppPreferences @Inject constructor(
     companion object Keys {
         val IS_DARK_MODE = booleanPreferencesKey("is_dark_mode")
         val USE_DYNAMIC_COLOR = booleanPreferencesKey("use_dynamic_color")
+        val APP_LANGUAGE = stringPreferencesKey("app_language")
         val CLOCK_STYLE = stringPreferencesKey("clock_style")
         val WALLPAPER_URI = stringPreferencesKey("wallpaper_uri")
         val WALLPAPER_DIM_ALPHA = floatPreferencesKey("wallpaper_dim_alpha")
@@ -48,6 +50,9 @@ class AppPreferences @Inject constructor(
             AppSettings(
                 isDarkMode = prefs[IS_DARK_MODE] ?: true,
                 useDynamicColor = prefs[USE_DYNAMIC_COLOR] ?: false,
+                appLanguage = prefs[APP_LANGUAGE]?.let {
+                    runCatching { AppLanguage.valueOf(it) }.getOrDefault(AppLanguage.SYSTEM)
+                } ?: AppLanguage.SYSTEM,
                 clockStyle = prefs[CLOCK_STYLE]?.let {
                     runCatching { ClockStyle.valueOf(it) }.getOrDefault(ClockStyle.DIGITAL)
                 } ?: ClockStyle.DIGITAL,
@@ -72,6 +77,7 @@ class AppPreferences @Inject constructor(
 
     suspend fun setDarkMode(value: Boolean) = updateSettings { this[IS_DARK_MODE] = value }
     suspend fun setDynamicColor(value: Boolean) = updateSettings { this[USE_DYNAMIC_COLOR] = value }
+    suspend fun setAppLanguage(value: AppLanguage) = updateSettings { this[APP_LANGUAGE] = value.name }
     suspend fun setClockStyle(value: ClockStyle) = updateSettings { this[CLOCK_STYLE] = value.name }
     suspend fun setWallpaperUri(uri: String) = updateSettings { this[WALLPAPER_URI] = uri }
     suspend fun setWallpaperDimAlpha(v: Float) = updateSettings { this[WALLPAPER_DIM_ALPHA] = v }

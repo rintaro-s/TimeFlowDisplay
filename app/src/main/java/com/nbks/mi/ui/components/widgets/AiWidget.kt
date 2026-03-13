@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.*
 import com.nbks.mi.domain.model.AiMessage
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 
 @Composable
 fun AiWidget(
@@ -41,6 +42,7 @@ fun AiWidget(
     var inputText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
     val context = LocalContext.current
+    val isJa = LocalIsJa.current
 
     var isListening by remember { mutableStateOf(false) }
     val speechRecognizer = remember {
@@ -54,7 +56,7 @@ fun AiWidget(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
-            startSpeechRecognition(context, speechRecognizer) { result ->
+            startSpeechRecognition(context, speechRecognizer, if (isJa) "ja-JP" else "en-US") { result ->
                 inputText = result
                 isListening = false
             }
@@ -74,13 +76,13 @@ fun AiWidget(
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "AI チャット",
+            title = if (isJa) "AI チャット" else "AI Chat",
             icon = Icons.Default.SmartToy,
             isDarkTheme = isDarkTheme,
             actions = {
                 if (messages.isNotEmpty()) {
                     IconButton(onClick = onClearHistory, modifier = Modifier.size(24.dp)) {
-                        Icon(Icons.Default.DeleteSweep, contentDescription = "履歴消去", modifier = Modifier.size(14.dp))
+                        Icon(Icons.Default.DeleteSweep, contentDescription = if (isJa) "履歴消去" else "Clear history", modifier = Modifier.size(14.dp))
                     }
                 }
             }
@@ -96,7 +98,7 @@ fun AiWidget(
                         modifier = Modifier.size(36.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f))
                     Spacer(Modifier.height(8.dp))
-                    Text("LMStudio URLを\n設定してください",
+                    Text(if (isJa) "LMStudio URLを\n設定してください" else "Configure\nLMStudio URL",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                         textAlign = TextAlign.Center)
@@ -119,7 +121,7 @@ fun AiWidget(
                                 modifier = Modifier.size(28.dp),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f))
                             Spacer(Modifier.height(4.dp))
-                            Text("マイクボタンで音声入力，\nまたはテキストを入力",
+                            Text(if (isJa) "マイクボタンで音声入力，\nまたはテキストを入力" else "Tap mic to speak\nor type a message",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                                 textAlign = TextAlign.Center)
@@ -133,7 +135,7 @@ fun AiWidget(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         CircularProgressIndicator(modifier = Modifier.size(14.dp), strokeWidth = 2.dp)
                         Spacer(Modifier.width(8.dp))
-                        Text("考え中...", style = MaterialTheme.typography.labelSmall,
+                        Text(if (isJa) "考え中..." else "Thinking...", style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f))
                     }
                 }
@@ -164,7 +166,7 @@ fun AiWidget(
                 ) {
                     Icon(
                         if (isListening) Icons.Default.MicOff else Icons.Default.Mic,
-                        contentDescription = if (isListening) "停止" else "音声入力",
+                        contentDescription = if (isListening) (if (isJa) "停止" else "Stop") else (if (isJa) "音声入力" else "Voice input"),
                         modifier = Modifier.size(18.dp),
                         tint = if (isListening) MaterialTheme.colorScheme.onError
                         else MaterialTheme.colorScheme.onSurfaceVariant)
@@ -176,7 +178,7 @@ fun AiWidget(
                 value = inputText,
                 onValueChange = { inputText = it },
                 placeholder = {
-                    Text(if (isListening) "聞いています..." else "メッセージを入力...",
+                    Text(if (isListening) (if (isJa) "耸いています..." else "Listening...") else (if (isJa) "メッセージを入力..." else "Type a message..."),
                         style = MaterialTheme.typography.labelSmall)
                 },
                 modifier = Modifier.weight(1f),
@@ -199,7 +201,7 @@ fun AiWidget(
                         MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
                     shape = CircleShape),
             ) {
-                Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "送信",
+                Icon(Icons.AutoMirrored.Filled.Send, contentDescription = if (isJa) "送信" else "Send",
                     modifier = Modifier.size(18.dp),
                     tint = if (inputText.isNotBlank() && !isLoading)
                         MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant)
@@ -210,8 +212,8 @@ fun AiWidget(
     if (showMicPermissionDialog) {
         AlertDialog(
             onDismissRequest = { showMicPermissionDialog = false },
-            title = { Text("マイク権限が必要") },
-            text = { Text("音声入力を使うにはマイクのアクセス権限が必要です。設定から許可してください。") },
+            title = { Text(if (isJa) "マイク権限が必要" else "Microphone Permission Required") },
+            text = { Text(if (isJa) "音声入力を使うにはマイクのアクセス権限が必要です。設定から許可してください。" else "Microphone permission is needed for voice input. Please allow it in Settings.") },
             confirmButton = { TextButton(onClick = { showMicPermissionDialog = false }) { Text("OK") } },
         )
     }
@@ -220,12 +222,13 @@ fun AiWidget(
 private fun startSpeechRecognition(
     context: android.content.Context,
     recognizer: SpeechRecognizer?,
+    language: String,
     onResult: (String) -> Unit,
 ) {
     recognizer ?: return
     val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
         putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ja-JP")
+        putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
         putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
     }
     recognizer.setRecognitionListener(object : RecognitionListener {

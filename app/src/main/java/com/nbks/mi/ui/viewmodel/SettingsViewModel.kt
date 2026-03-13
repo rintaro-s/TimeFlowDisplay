@@ -36,6 +36,7 @@ class SettingsViewModel @Inject constructor(
     // ─────────────────────────────────────────────
     fun setDarkMode(dark: Boolean) = viewModelScope.launch { appPreferences.setDarkMode(dark) }
     fun setDynamicColor(v: Boolean) = viewModelScope.launch { appPreferences.setDynamicColor(v) }
+    fun setAppLanguage(language: AppLanguage) = viewModelScope.launch { appPreferences.setAppLanguage(language) }
     fun setClockStyle(style: ClockStyle) = viewModelScope.launch { appPreferences.setClockStyle(style) }
     fun setPrimaryColorSeed(seed: Long) = viewModelScope.launch { appPreferences.setPrimaryColorSeed(seed) }
     fun setWidgetOpacity(v: Float) = viewModelScope.launch { appPreferences.setWidgetOpacity(v) }

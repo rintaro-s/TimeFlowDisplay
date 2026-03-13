@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.*
 import com.nbks.mi.domain.model.Memo
 import com.nbks.mi.ui.components.WidgetHeader
-import com.nbks.mi.ui.theme.MiColors
+import com.nbks.mi.ui.theme.*
 import java.time.format.DateTimeFormatter
 
 // ─────────────────────────────────────────────
@@ -30,20 +30,21 @@ fun MemoWidget(
     onDeleteMemo: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val isJa = LocalIsJa.current
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "メモ",
+            title = if (isJa) "メモ" else "Memo",
             icon = Icons.Default.Note,
             isDarkTheme = isDarkTheme,
             actions = {
                 IconButton(onClick = onNewMemo, modifier = Modifier.size(24.dp)) {
-                    Icon(Icons.Default.Add, contentDescription = "新規メモ", modifier = Modifier.size(16.dp))
+                    Icon(Icons.Default.Add, contentDescription = if (isJa) "新規メモ" else "New Memo", modifier = Modifier.size(16.dp))
                 }
             }
         )
 
         if (memos.isEmpty()) {
-            EmptyPlaceholder(message = "メモはありません\n右上の＋から追加できます")
+            EmptyPlaceholder(message = if (isJa) "メモはありません\n右上の＋から追加できます" else "No memos\nTap ＋ to add one")
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(6.dp),
@@ -147,17 +148,18 @@ fun MemoEditorDialog(
     var content by remember(memo) { mutableStateOf(memo?.content ?: "") }
     var colorIndex by remember(memo) { mutableIntStateOf(memo?.colorIndex ?: 0) }
     var isPinned by remember(memo) { mutableStateOf(memo?.isPinned ?: false) }
+    val isJa = LocalIsJa.current
 
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(if (memo?.id == 0L || memo == null) "新規メモ" else "メモを編集")
+                Text(if (memo?.id == 0L || memo == null) (if (isJa) "新規メモ" else "New Memo") else (if (isJa) "メモを編集" else "Edit Memo"))
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = { isPinned = !isPinned }, modifier = Modifier.size(32.dp)) {
                     Icon(
                         if (isPinned) Icons.Default.PushPin else Icons.Default.PushPin,
-                        contentDescription = "ピン留め",
+                        contentDescription = if (isJa) "ピン留め" else "Pin",
                         tint = if (isPinned) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                         modifier = Modifier.size(18.dp),
@@ -170,19 +172,19 @@ fun MemoEditorDialog(
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    placeholder = { Text("タイトル") },
+                    placeholder = { Text(if (isJa) "タイトル" else "Title") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                 )
                 OutlinedTextField(
                     value = content,
                     onValueChange = { content = it },
-                    placeholder = { Text("内容を入力...") },
+                    placeholder = { Text(if (isJa) "内容を入力..." else "Write something...") },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 100.dp, max = 260.dp),
                     maxLines = 12,
                 )
                 // カラーピッカー
-                Text("色", style = MaterialTheme.typography.labelSmall)
+                Text(if (isJa) "色" else "Color", style = MaterialTheme.typography.labelSmall)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     val colors = if (isDarkTheme) MiColors.MemoColors else MiColors.MemoColorsLight
                     colors.forEachIndexed { idx, color ->
@@ -206,11 +208,11 @@ fun MemoEditorDialog(
                 onClick = { onSave(title, content, colorIndex, isPinned) },
                 enabled = content.isNotBlank() || title.isNotBlank(),
             ) {
-                Text("保存")
+                Text(if (isJa) "保存" else "Save")
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("キャンセル") }
+            TextButton(onClick = onDismiss) { Text(if (isJa) "キャンセル" else "Cancel") }
         },
     )
 }

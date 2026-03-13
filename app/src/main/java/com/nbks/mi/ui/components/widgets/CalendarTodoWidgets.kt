@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -25,11 +26,12 @@ fun CalendarWidget(
 ) {
     val today = LocalDate.now()
     val dateFormatter = DateTimeFormatter.ofPattern("M/d")
-    val weekdays = listOf("月", "火", "水", "木", "金", "土", "日")
+    val isJa = LocalIsJa.current
+    val weekdays = if (isJa) listOf("月", "火", "水", "木", "金", "土", "日") else listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "カレンダー",
+            title = if (isJa) "カレンダー" else "Calendar",
             icon = Icons.Default.CalendarMonth,
             isDarkTheme = isDarkTheme,
         )
@@ -41,7 +43,7 @@ fun CalendarWidget(
                 val dowIndex = day.dayOfWeek.value - 1
                 val isToday = i == 0
                 val isTomorrow = i == 1
-                val badge = when { isToday -> "今日"; isTomorrow -> "明日"; else -> null }
+                val badge = when { isToday -> if (isJa) "今日" else "Today"; isTomorrow -> if (isJa) "明日" else "Tomorrow"; else -> null }
                 val rowColor = if (isToday) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f) else Color.Transparent
                 val dowColor = when { dowIndex == 6 -> MaterialTheme.colorScheme.error; dowIndex == 5 -> MaterialTheme.colorScheme.tertiary; else -> MaterialTheme.colorScheme.onSurface }
                 Row(
@@ -66,6 +68,7 @@ fun CalendarWidget(
 
 @Composable
 fun NotConnectedPlaceholder(icon: ImageVector, service: String) {
+    val isJa = LocalIsJa.current
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,8 +76,8 @@ fun NotConnectedPlaceholder(icon: ImageVector, service: String) {
     ) {
         Icon(icon, contentDescription = null, modifier = Modifier.size(36.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f))
         Spacer(Modifier.height(8.dp))
-        Text("$service 未設定", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f))
-        Text("設定から連携してください", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.35f))
+        Text(if (isJa) "$service 未設定" else "$service not configured", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f))
+        Text(if (isJa) "設定から連携してください" else "Connect in Settings", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.35f))
     }
 }
 

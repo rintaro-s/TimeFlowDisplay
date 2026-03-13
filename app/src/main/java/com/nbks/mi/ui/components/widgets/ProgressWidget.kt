@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import com.nbks.mi.domain.model.ProgressData
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalTime
@@ -33,13 +34,14 @@ fun ProgressWidget(
 ) {
     val now = LocalDate.now()
     val time = LocalTime.now()
+    val isJa = LocalIsJa.current
 
     val todayProgress = run {
         val totalMinutes = 24 * 60f
         val elapsed = time.hour * 60f + time.minute + time.second / 60f
         ProgressData(
             progress = (elapsed / totalMinutes).coerceIn(0f, 1f),
-            label = "今日",
+            label = if (isJa) "今日" else "Today",
             sublabel = "${time.hour}:${"%02d".format(time.minute)}",
         )
     }
@@ -48,8 +50,8 @@ fun ProgressWidget(
         val dayOfWeekVal = now.dayOfWeek.value // Mon=1..Sun=7
         ProgressData(
             progress = ((dayOfWeekVal - 1) / 6f + (time.hour / 24f) / 7f).coerceIn(0f, 1f),
-            label = "今週",
-            sublabel = "${now.dayOfWeek.getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE)}",
+            label = if (isJa) "今週" else "Week",
+            sublabel = if (isJa) "${now.dayOfWeek.getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.JAPANESE)}" else "${now.dayOfWeek.getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.ENGLISH)}",
         )
     }
 
@@ -57,8 +59,8 @@ fun ProgressWidget(
         val daysInMonth = YearMonth.now().lengthOfMonth().toFloat()
         ProgressData(
             progress = ((now.dayOfMonth - 1 + time.hour / 24f) / daysInMonth).coerceIn(0f, 1f),
-            label = "今月",
-            sublabel = "${now.monthValue}月",
+            label = if (isJa) "今月" else "Month",
+            sublabel = if (isJa) "${now.monthValue}月" else now.month.getDisplayName(java.time.format.TextStyle.SHORT, java.util.Locale.ENGLISH),
         )
     }
 
@@ -67,14 +69,14 @@ fun ProgressWidget(
         val daysInYear = (if (now.isLeapYear) 366 else 365).toFloat()
         ProgressData(
             progress = (dayOfYear / daysInYear).coerceIn(0f, 1f),
-            label = "今年",
+            label = if (isJa) "今年" else "Year",
             sublabel = "${now.year}",
         )
     }
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "時間進捗",
+            title = if (isJa) "時間進捗" else "Progress",
             icon = Icons.Default.TrendingUp,
             isDarkTheme = isDarkTheme,
         )

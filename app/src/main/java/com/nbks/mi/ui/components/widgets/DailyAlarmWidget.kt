@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.nbks.mi.domain.model.DailyAlarmStatus
 import com.nbks.mi.domain.model.TimerPreset
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 
 private val CARD_COLORS = listOf(
     Color(0xFF1B5E20),
@@ -45,11 +46,12 @@ fun DailyAlarmWidget(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val isJa = LocalIsJa.current
     var showAddDialog by remember { mutableStateOf(false) }
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = if (java.util.Locale.getDefault().language == "ja") "時刻アラーム" else "Daily Alarms",
+            title = if (isJa) "時刻アラーム" else "Daily Alarms",
             icon = Icons.Default.Alarm,
             isDarkTheme = isDarkTheme,
             actions = {
@@ -64,7 +66,7 @@ fun DailyAlarmWidget(
                 Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Icon(Icons.Default.Alarm, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f))
                     Text(
-                        if (java.util.Locale.getDefault().language == "ja") "＋で時刻を追加\n毎日自動リセット" else "Tap ＋ to add alarms\nAuto-reset daily",
+                    if (isJa) "＋で時刻を追加\n毎日自動リセット" else "Tap ＋ to add alarms\nAuto-reset daily",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                     )
@@ -109,7 +111,7 @@ private fun DailyAlarmCard(
     val h = remainMs / 3_600_000
     val m = (remainMs % 3_600_000) / 60_000
     val s = (remainMs % 60_000) / 1000
-    val isJa = java.util.Locale.getDefault().language == "ja"
+    val isJa = LocalIsJa.current
 
     val countdownText = when {
         passed -> if (isJa) "通過済み" else "Passed"
@@ -193,7 +195,7 @@ private fun AddAlarmDialog(
     onDismiss: () -> Unit,
 ) {
     val context = LocalContext.current
-    val isJa = java.util.Locale.getDefault().language == "ja"
+    val isJa = LocalIsJa.current
     var pickedHour by remember { mutableIntStateOf(8) }
     var pickedMinute by remember { mutableIntStateOf(0) }
     var label by remember { mutableStateOf("") }

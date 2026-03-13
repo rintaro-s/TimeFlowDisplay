@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.nbks.mi.domain.model.WebhookButton
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 import kotlinx.coroutines.delay
 
 // ─────────────────────────────────────────────
@@ -38,6 +39,7 @@ fun WebhookButtonWidget(
 ) {
     var showAddDialog by remember { mutableStateOf(false) }
     var editTarget by remember { mutableStateOf<WebhookButton?>(null) }
+    val isJa = LocalIsJa.current
 
     val myButtons = buttons.filter { it.widgetKey == widgetKey || widgetKey.isEmpty() }
 
@@ -49,7 +51,7 @@ fun WebhookButtonWidget(
             actions = {
                 if (isEditMode) {
                     IconButton(onClick = { showAddDialog = true }, modifier = Modifier.size(24.dp)) {
-                        Icon(Icons.Default.Add, contentDescription = "追加", modifier = Modifier.size(14.dp))
+                        Icon(Icons.Default.Add, contentDescription = if (isJa) "追加" else "Add", modifier = Modifier.size(14.dp))
                     }
                 }
             }
@@ -66,7 +68,7 @@ fun WebhookButtonWidget(
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        if (isEditMode) "編集モードで＋から追加" else "編集モードでボタンを追加",
+                        if (isEditMode) (if (isJa) "編集モードで＋から追加" else "Tap ＋ to add buttons") else (if (isJa) "編集モードでボタンを追加" else "Add buttons in edit mode"),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                     )
@@ -180,16 +182,17 @@ private fun WebhookButtonEditDialog(
     var label by remember { mutableStateOf(initial?.label ?: "") }
     var webhookUrl by remember { mutableStateOf(initial?.webhookUrl ?: "") }
     var message by remember { mutableStateOf(initial?.message ?: "") }
+    val isJa = LocalIsJa.current
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (initial == null) "ボタンを追加" else "ボタンを編集") },
+        title = { Text(if (initial == null) (if (isJa) "ボタンを追加" else "Add Button") else (if (isJa) "ボタンを編集" else "Edit Button")) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(
                     value = label,
                     onValueChange = { label = it },
-                    label = { Text("ボタン名") },
+                    label = { Text(if (isJa) "ボタン名" else "Button name") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -204,7 +207,7 @@ private fun WebhookButtonEditDialog(
                 OutlinedTextField(
                     value = message,
                     onValueChange = { message = it },
-                    label = { Text("送信メッセージ") },
+                    label = { Text(if (isJa) "送信メッセージ" else "Message") },
                     maxLines = 4,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -224,8 +227,8 @@ private fun WebhookButtonEditDialog(
                     )
                 },
                 enabled = label.isNotBlank() && webhookUrl.isNotBlank() && message.isNotBlank(),
-            ) { Text(if (initial == null) "追加" else "保存") }
+            ) { Text(if (initial == null) (if (isJa) "追加" else "Add") else (if (isJa) "保存" else "Save")) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("キャンセル") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(if (isJa) "キャンセル" else "Cancel") } },
     )
 }

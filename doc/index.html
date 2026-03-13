@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Dashboard - Ambient Productivity Hub</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: 細字の明朝体とゴシック体を読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons (極細のアイコンを使用) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* ベーススタイリング */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            /* 初期状態はスクロール不可 */
+            overflow: hidden; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-serif {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        /* カスタムの極細線 */
+        .thin-border {
+            border-color: #f0f0f0;
+            border-width: 1px;
+        }
+
+        /* スクロールバーのカスタマイズ（目立たなくする） */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e0e0e0;
+        }
+
+        /* スクロール連動のアニメーション用クラス */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating dashboard canvas */
+        .floating-preview {
+            width: 100%;
+            background: radial-gradient(circle at top, rgba(255,255,255,0.95) 0%, rgba(237,240,255,0.8) 45%, rgba(226,247,255,0.7) 80%),
+                        linear-gradient(125deg, rgba(247,242,255,0.6), rgba(214,235,255,0.7));
+            position: relative;
+            overflow: hidden;
+        }
+        .floating-preview::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('./video/image.jpg') center/cover no-repeat;
+            opacity: 0.08;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+        .floating-layer {
+            position: relative;
+            width: 100%;
+            min-height: 160vh;
+            padding: 12vh 4vw 18vh;
+        }
+        .floating-caption {
+            position: absolute;
+            top: 5vh;
+            left: 5vw;
+            z-index: 5;
+            max-width: 420px;
+            color: #252743;
+        }
+        .floating-caption p {
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            font-size: 11px;
+            color: #7a7f9c;
+        }
+        .floating-caption h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(28px, 5vw, 52px);
+            line-height: 1.2;
+            letter-spacing: 0.08em;
+            font-weight: 300;
+            margin-top: 12px;
+        }
+        .floating-caption span {
+            display: inline-block;
+            margin-top: 18px;
+            font-size: 12px;
+            letter-spacing: 0.24em;
+            color: #525674;
+        }
+        .floating-widget {
+            position: absolute;
+            top: var(--y, 50%);
+            left: var(--x, 50%);
+            transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+            padding: clamp(18px, 2vw, 32px);
+            min-width: clamp(240px, 28vw, 440px);
+            border-radius: 26px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(108, 119, 163, 0.2);
+            box-shadow: 0 30px 80px rgba(20, 20, 45, 0.18);
+            backdrop-filter: blur(18px);
+            color: #1c1c28;
+            animation: floatSoft calc(14s + var(--delay, 0s)) ease-in-out infinite alternate;
+        }
+        .floating-widget::after {
+            content: attr(data-widget);
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: rgba(26, 30, 63, 0.25);
+        }
+        .floating-widget.is-hot {
+            box-shadow: 0 45px 120px rgba(35, 22, 102, 0.25);
+            border-color: rgba(88, 80, 190, 0.5);
+        }
+        @keyframes floatSoft {
+            0% { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+            100% { transform: translate(calc(-50% + 10px), calc(-50% - 6px)) rotate(calc(var(--r, 0deg) + 1.5deg)); }
+        }
+        .floating-widget h4 {
+            font-family: 'Noto Serif JP', serif;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            font-weight: 300;
+            color: #2c264d;
+        }
+        .floating-widget small {
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #8689a5;
+        }
+        .clock-face {
+            font-size: clamp(42px, 5vw, 86px);
+            letter-spacing: 0.1em;
+            font-weight: 300;
+        }
+        .clock-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            color: #6f7491;
+        }
+        .memo-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .memo-card {
+            border-radius: 18px;
+            padding: 14px 16px;
+            background: rgba(255, 248, 230, 0.9);
+            color: #4b3b21;
+            box-shadow: inset 0 0 0 1px rgba(75, 59, 33, 0.08);
+        }
+        .memo-card:nth-child(2) {
+            background: rgba(231, 244, 255, 0.95);
+            color: #1f2f4d;
+        }
+        .memo-card:nth-child(3) {
+            background: rgba(240, 235, 255, 0.95);
+            color: #3b2f6b;
+        }
+        .timer-face {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-size: clamp(48px, 6vw, 90px);
+            font-weight: 200;
+            color: #1f243f;
+        }
+        .timer-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .pill {
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: rgba(25, 24, 47, 0.08);
+            color: #303552;
+        }
+        .pill.urgent { background: rgba(255, 107, 135, 0.16); color: #b22a50; }
+        .ai-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .ai-msg {
+            border-radius: 16px;
+            padding: 12px 14px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .ai-msg.user {
+            align-self: flex-end;
+            background: rgba(118, 121, 249, 0.18);
+            color: #2b2e73;
+        }
+        .ai-msg.bot {
+            align-self: flex-start;
+            background: rgba(244, 245, 255, 0.95);
+            color: #4c516f;
+        }
+        .ai-msg.is-pulse {
+            box-shadow: 0 18px 40px rgba(41, 32, 92, 0.25);
+        }
+        .task-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .task-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 14px;
+            background: rgba(247, 249, 255, 0.9);
+            color: #47506c;
+            transition: background 0.4s ease;
+        }
+        .task-row.is-done {
+            background: rgba(148, 237, 208, 0.3);
+            color: #216651;
+        }
+        .webhook-cloud {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .webhook-chip {
+            padding: 10px 12px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            color: white;
+            background: linear-gradient(135deg, #8e7bff, #5bd2ff);
+        }
+        .webhook-chip:nth-child(2) { background: linear-gradient(135deg, #ffb199, #ff0844); }
+        .webhook-chip:nth-child(3) { background: linear-gradient(135deg, #61e6c8, #64b5ff); }
+        .webhook-chip:nth-child(4) { background: linear-gradient(135deg, #ffc857, #ff5f6d); }
+        .wallpaper-note {
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            color: #4c4f6c;
+            line-height: 2;
+        }
+        @media (max-width: 900px) {
+            .floating-layer {
+                min-height: auto;
+                padding: 80px 24px;
+            }
+            .floating-widget {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                animation: none;
+                margin-bottom: 24px;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-gray-100 selection:text-gray-900">
+
+    <!-- 
+      ====================================================
+      1. ヒーローセクション (動画・画像・キャッチコピー)
+      ==================================================== 
+    -->
+    <header class="relative w-full h-screen overflow-hidden bg-white">
+        
+        <!-- ▼ 画像 (動画の最後のフレームと同じ画像を指定してください) ▼ -->
+        <!-- デモ用プレースホルダー画像 -->
+        <img 
+            src="./video/image.jpg" 
+            alt="Background end frame" 
+            class="absolute inset-0 w-full h-full object-cover z-0"
+        >
+
+        <!-- テキストの視認性を上げるためのごく薄い白のオーバーレイ -->
+        <div class="absolute inset-0 bg-white/30 z-10 mix-blend-overlay"></div>
+
+        <!-- ▼ 動画 ▼ -->
+        <!-- 
+          ブラウザの自動再生制限を回避するため、必ず muted と playsinline を入れます。
+          デモ用のプレースホルダー動画 (約15秒) を設定しています。
+        -->
+        <video 
+            id="intro-video" 
+            class="absolute inset-0 w-full h-full object-cover z-30 transition-opacity duration-[2500ms] ease-in-out" 
+            autoplay muted playsinline
+        >
+            <source src="./video/intro.mp4" type="video/mp4">
+        </video>
+
+        <!-- ▼ キャッチコピー (初期状態は透明) ▼ -->
+        <div id="hero-content" class="absolute inset-0 z-20 flex flex-col items-center justify-center opacity-0 transition-all duration-[2500ms] ease-out transform translate-y-8">
+            <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl tracking-[0.2em] text-gray-900 mb-4 font-light text-center leading-tight drop-shadow-sm">
+                Mi Dashboard
+            </h1>
+            <p class="text-xs md:text-sm tracking-[0.2em] text-gray-600 font-light uppercase text-center">
+                Ambient productivity hub for wall-mounted Android tablets
+            </p>
+        </div>
+
+        <!-- スクロールインジケーター (キャッチコピーと共に表示) -->
+        <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center opacity-0 transition-opacity duration-[3000ms] ease-in delay-1000">
+            <span class="text-[10px] tracking-[0.3em] text-gray-500 mb-4 uppercase font-light">Scroll</span>
+            <div class="w-[1px] h-12 bg-gray-300 overflow-hidden">
+                <div class="w-full h-full bg-gray-600 animate-[scroll-down_2s_ease-in-out_infinite]"></div>
+            </div>
+        </div>
+        
+        <style>
+            @keyframes scroll-down {
+                0% { transform: translateY(-100%); }
+                50% { transform: translateY(0); }
+                100% { transform: translateY(100%); }
+            }
+        </style>
+    </header>
+
+
+    <!-- 
+      ====================================================
+      2. メインコンテンツ (スクロール後に表示される内容)
+      ==================================================== 
+      ※初期状態はopacity-0で見えなくしておき、動画終了後にフェードイン
+    -->
+    <main id="main-content" class="opacity-0 transition-opacity duration-[2000ms] ease-in-out">
+        
+        <!-- Concept Section -->
+        <section class="py-32 md:py-48 px-6 max-w-4xl mx-auto text-center">
+            <h2 class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-light text-gray-800 mb-12 fade-in-up">
+                壁掛けタブレットを、あなただけのワークステーションに。
+            </h2>
+            <div class="space-y-8 text-sm md:text-base text-gray-500 font-light tracking-[0.1em] leading-loose fade-in-up delay-200">
+                <p>
+                    Mi Dashboard は Jetpack Compose で作られた常設ダッシュボード。<br>
+                    時計・カレンダー・メモ・タイマー・AI チャット・Webhook ボタンなど、<br class="hidden md:block">
+                    日々のワークフローに必要なウィジェットを 1 つの画面に集約します。
+                </p>
+                <p>
+                    レイアウトはドラッグ&ドロップで編集し、Room と DataStore に保存。<br>
+                    暗転スケジュールや壁紙ディムで、昼夜を問わず視認性の高い情報スペースを実現します。
+                </p>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="w-full flex justify-center fade-in-up">
+            <div class="w-16 thin-border border-t"></div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="py-32 md:py-40 px-6 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
+                
+                <!-- Feature 1 -->
+                <div class="flex flex-col items-center text-center fade-in-up">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full border border-gray-100 mb-8 bg-gray-50/50">
+                        <i data-lucide="feather" stroke-width="1" class="w-6 h-6 text-gray-600"></i>
+                    </div>
+                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">ドラッグ&ドロップ編集</h3>
+                    <p class="text-xs text-gray-500 font-light tracking-[0.08em] leading-relaxed">
+                        時計、メモ、タイマー、画像などのウィジェットを自由に配置。<br>サイズや不透明度も即座に調整できます。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="flex flex-col items-center text-center fade-in-up delay-100">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full border border-gray-100 mb-8 bg-gray-50/50">
+                        <i data-lucide="wind" stroke-width="1" class="w-6 h-6 text-gray-600"></i>
+                    </div>
+                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">ローカル AI & Webhook</h3>
+                    <p class="text-xs text-gray-500 font-light tracking-[0.08em] leading-relaxed">
+                        LMStudio 互換 API と接続して AI チャットを実現。<br>Webhook ボタンで Discord などの自動化をトリガー。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="flex flex-col items-center text-center fade-in-up delay-200">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full border border-gray-100 mb-8 bg-gray-50/50">
+                        <i data-lucide="sliders-horizontal" stroke-width="1" class="w-6 h-6 text-gray-600"></i>
+                    </div>
+                    <h3 class="font-serif text-lg tracking-[0.15em] font-light text-gray-800 mb-4">時間帯オートディム</h3>
+                    <p class="text-xs text-gray-500 font-light tracking-[0.08em] leading-relaxed">
+                        WorkManager とスケジュール設定で、<br>時間帯ごとの画面暗転や通知モードを自動制御します。
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Floating App Preview Section -->
+        <section class="floating-preview fade-in-up" id="app-preview-section">
+            <div class="floating-layer">
+                <article class="floating-widget" data-widget="WidgetType.CLOCK" style="--x:16%; --y:28%; --r:-4deg;">
+                    <small>AppSettings.clockStyle = DIGITAL</small>
+                    <h4>時計 / Clock</h4>
+                    <div class="clock-face" id="floatingClock">12:34</div>
+                    <div class="clock-meta">
+                        <span id="floatingDate">THU · MAR 13</span>
+                        <span>KeepScreenOn = true</span>
+                    </div>
+                    <p class="wallpaper-note">WallpaperDimAlpha = 0.30 · DynamicColor = Off</p>
+                </article>
+
+                <article class="floating-widget" data-widget="WidgetType.CALENDAR" style="--x:38%; --y:18%; --r:2deg;">
+                    <small>ScreenScheduleWorker</small>
+                    <h4>スケジュール / Screen dim</h4>
+                    <div class="wallpaper-note">
+                        月~金 · 22:00 → 06:00 · brightness 25%<br>
+                        土~日 · 00:30 → 08:30 · brightness 10%
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Tasks</p>
+                                    <p class="text-gray-900" id="taskCount">7 active</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Webhook</p>
+                                    <p class="text-gray-900">3 triggers</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="app-preview-column">
+                        <article class="app-widget" data-widget="ai">
+                            <div class="flex justify-between items-center mb-4">
+                                <div>
+                                    <p class="text-xs tracking-[0.35em] text-gray-500 uppercase">AI chat</p>
+                                    <p class="text-sm text-gray-400 tracking-[0.1em]">LMStudio endpoint</p>
+                                </div>
+                                <span class="text-[10px] tracking-[0.4em] text-emerald-500 uppercase">Connected</span>
+                            </div>
+                            <div class="app-ai-thread" id="aiThread">
+                                <div class="app-ai-msg user">今日の進捗をまとめて。</div>
+                                <div class="app-ai-msg bot">ダッシュボードに配置された 5 つのウィジェットを確認しました。メモが 3 件更新されています。</div>
+                                <div class="app-ai-msg user">Webhook で Discord に送って。</div>
+                                <div class="app-ai-msg bot">"Daily standup" チャンネルへ送信しました。何か追記しますか？</div>
+                            </div>
+                            <div class="mt-6 flex items-center justify-between text-[11px] text-gray-500 tracking-[0.2em] uppercase">
+                                <span>Tokens 512 / 2048</span>
+                                <span>Latency 120ms</span>
+                            </div>
+                        </article>
+
+                        <article class="app-widget" data-widget="tasks">
+                            <div class="flex items-center justify-between mb-3">
+                                <p class="text-xs tracking-[0.3em] text-gray-500 uppercase">Daily tasks</p>
+                                <span class="text-[10px] tracking-[0.3em] text-gray-400">auto reset</span>
+                            </div>
+                            <div class="app-task-list" id="taskList">
+                                <div class="app-task">
+                                    <span>Water plants</span>
+                                    <span>07:30</span>
+                                </div>
+                                <div class="app-task">
+                                    <span>Deep work session</span>
+                                    <span>09:00</span>
+                                </div>
+                                <div class="app-task">
+                                    <span>Stretching timer</span>
+                                    <span>11:00</span>
+                                </div>
+                                <div class="app-task">
+                                    <span>Sync webhook logs</span>
+                                    <span>14:30</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="app-widget" data-widget="webhook">
+                            <div class="flex justify-between items-center mb-4">
+                                <p class="text-xs tracking-[0.3em] text-gray-500 uppercase">Webhook buttons</p>
+                                <span class="text-[10px] tracking-[0.35em] text-gray-400">Tap to trigger</span>
+                            </div>
+                            <div class="app-webhook-grid">
+                                <div class="app-webhook-btn">Discord Standup</div>
+                                <div class="app-webhook-btn">Lights Scene</div>
+                                <div class="app-webhook-btn">Sync AI Notes</div>
+                                <div class="app-webhook-btn">Timer Reset</div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-32 px-6 flex flex-col items-center justify-center text-center fade-in-up">
+            <h2 class="font-serif text-xl tracking-[0.2em] font-light text-gray-800 mb-6">
+                デスクにも壁にも、常設の情報ハブを。
+            </h2>
+            <p class="text-sm text-gray-500 tracking-[0.08em] mb-8 max-w-2xl">
+                GitHub でソースコードとセットアップ手順を確認し、LMStudio や Webhook と組み合わせた自分だけの作業ボードを構築してください。
+            </p>
+            <a href="../README.md" class="inline-flex items-center justify-center px-12 py-4 border border-gray-300 text-sm tracking-[0.2em] text-gray-600 font-light hover:bg-gray-50 hover:text-gray-900 transition-colors duration-500">
+                VIEW README
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full thin-border border-t py-12 flex flex-col items-center opacity-0 transition-opacity duration-1000" id="footer">
+        <div class="mb-6">
+            <i data-lucide="aperture" stroke-width="0.5" class="w-8 h-8 text-gray-400"></i>
+        </div>
+        <p class="text-[10px] tracking-[0.2em] text-gray-400 font-light uppercase">
+            &copy; 2026 Mi Dashboard Project. All rights reserved.
+        </p>
+    </footer>
+
+    <!-- 
+      ====================================================
+      スクリプト制御 (動画イベント処理・スクロールアニメーション)
+      ==================================================== 
+    -->
+    <script>
+        // Lucideアイコンの初期化
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('intro-video');
+            const heroContent = document.getElementById('hero-content');
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            const mainContent = document.getElementById('main-content');
+            const footer = document.getElementById('footer');
+            const body = document.body;
+
+            // --- 動画終了時の処理 ---
+            const onVideoComplete = () => {
+                // 1. 動画をフェードアウト
+                video.classList.add('opacity-0');
+                
+                // フェードアウト完了後にDOMから非表示にする（背後の画像が完全に露わになる）
+                setTimeout(() => {
+                    video.style.display = 'none';
+                }, 2500);
+
+                // 2. キャッチコピーとスクロールインジケーターをフェードイン＆上にスライド
+                heroContent.classList.remove('opacity-0', 'translate-y-8');
+                heroContent.classList.add('opacity-100', 'translate-y-0');
+                
+                scrollIndicator.classList.remove('opacity-0');
+                scrollIndicator.classList.add('opacity-100');
+
+                // 3. メインコンテンツのopacityを1にし、スクロールを許可する
+                mainContent.classList.remove('opacity-0');
+                footer.classList.remove('opacity-0');
+                body.style.overflow = 'auto'; // スクロールロック解除
+            };
+
+            // 動画の再生が終了した時のイベントリスナー
+            video.addEventListener('ended', onVideoComplete);
+
+            // フォールバック: 動画がエラーで再生できない、または自動再生がブロックされた場合
+            // 3秒後に強制的にUIを表示させる
+            let isVideoPlaying = false;
+            video.addEventListener('playing', () => { isVideoPlaying = true; });
+            
+            setTimeout(() => {
+                if (!isVideoPlaying || video.readyState === 0) {
+                    console.log("動画の再生が確認できないため、フォールバックを実行します。");
+                    onVideoComplete();
+                }
+            }, 3000);
+
+            // --- スクロールアニメーション (Intersection Observer) ---
+            // 要素が画面に入ったら 'is-visible' クラスを付与してふわっと表示
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // 一度表示したら監視を解除
+                    }
+                });
+            }, observerOptions);
+
+            // '.fade-in-up' クラスを持つ全要素を監視対象にする
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach(el => observer.observe(el));
+
+            // --- App preview animation ---
+            const widgetCards = Array.from(document.querySelectorAll('.app-widget'));
+            let widgetPointer = 0;
+            const cycleWidgets = () => {
+                widgetCards.forEach(card => card.classList.remove('is-active'));
+                if (widgetCards.length === 0) return;
+                widgetCards[widgetPointer].classList.add('is-active');
+                widgetPointer = (widgetPointer + 1) % widgetCards.length;
+            };
+            cycleWidgets();
+            setInterval(cycleWidgets, 3500);
+
+            // Clock + date updater
+            const clockEl = document.getElementById('previewClock');
+            const dateEl = document.getElementById('previewDate');
+            const updateClock = () => {
+                if (!clockEl || !dateEl) return;
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                clockEl.textContent = `${hours}:${minutes}`;
+                const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                const formatted = formatter.format(now).toUpperCase().replace(',', '');
+                dateEl.textContent = formatted;
+            };
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // Progress animation
+            const progressFill = document.getElementById('appProgressFill');
+            const taskCountLabel = document.getElementById('taskCount');
+            const memoCountLabel = document.getElementById('memoCount');
+            const animateProgress = () => {
+                if (!progressFill) return;
+                const value = 35 + Math.floor(Math.random() * 55);
+                progressFill.style.width = `${value}%`;
+                progressFill.setAttribute('data-label', `${value}%`);
+                if (taskCountLabel) {
+                    const tasks = 5 + Math.floor(Math.random() * 5);
+                    taskCountLabel.textContent = `${tasks} active`;
+                }
+                if (memoCountLabel) {
+                    const memos = 8 + Math.floor(Math.random() * 8);
+                    memoCountLabel.textContent = `${memos} cards`;
+                }
+            };
+            animateProgress();
+            setInterval(animateProgress, 4200);
+
+            // Task pulse
+            const taskItems = Array.from(document.querySelectorAll('#taskList .app-task'));
+            let taskPointer = 0;
+            const cycleTasks = () => {
+                if (taskItems.length === 0) return;
+                taskItems.forEach(item => item.classList.remove('is-done'));
+                taskItems.slice(0, taskPointer + 1).forEach(item => item.classList.add('is-done'));
+                taskPointer = (taskPointer + 1) % taskItems.length;
+            };
+            cycleTasks();
+            setInterval(cycleTasks, 3600);
+
+            // AI message pulse
+            const aiMessages = Array.from(document.querySelectorAll('#aiThread .app-ai-msg'));
+            let aiPointer = 0;
+            const pulseAi = () => {
+                aiMessages.forEach(msg => msg.classList.remove('is-pulse'));
+                if (aiMessages.length === 0) return;
+                aiMessages[aiPointer].classList.add('is-pulse');
+                aiPointer = (aiPointer + 1) % aiMessages.length;
+            };
+            pulseAi();
+            setInterval(pulseAi, 3000);
+        });
+    </script>
+</body>
+</html>

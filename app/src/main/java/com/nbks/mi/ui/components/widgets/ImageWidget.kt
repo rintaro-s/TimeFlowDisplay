@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.nbks.mi.ui.components.WidgetHeader
+import com.nbks.mi.ui.theme.LocalIsJa
 import org.json.JSONObject
 
 // ─────────────────────────────────────────────
@@ -30,6 +31,7 @@ fun ImageWidget(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val isJa = LocalIsJa.current
     val imageUri: String? = remember(customSettings) {
         runCatching { JSONObject(customSettings).optString("imageUri", "") }
             .getOrDefault("").ifBlank { null }
@@ -53,7 +55,7 @@ fun ImageWidget(
 
     Column(modifier = modifier.fillMaxSize()) {
         WidgetHeader(
-            title = "画像",
+            title = if (isJa) "画像" else "Image",
             icon = Icons.Default.Image,
             isDarkTheme = isDarkTheme,
             actions = {
@@ -62,7 +64,7 @@ fun ImageWidget(
                         onClick = { picker.launch("image/*") },
                         modifier = Modifier.size(24.dp),
                     ) {
-                        Icon(Icons.Default.FolderOpen, contentDescription = "画像を選択",
+                        Icon(Icons.Default.FolderOpen, contentDescription = if (isJa) "画像を選択" else "Select image",
                             modifier = Modifier.size(14.dp))
                     }
                 }
@@ -88,7 +90,7 @@ fun ImageWidget(
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            if (isEditMode) "編集モードで画像を選択" else "編集モードで画像を選択できます",
+                            if (isEditMode) (if (isJa) "編集モードで画像を選択" else "Select an image in edit mode") else (if (isJa) "編集モードで画像を選択できます" else "Select an image in edit mode"),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                         )

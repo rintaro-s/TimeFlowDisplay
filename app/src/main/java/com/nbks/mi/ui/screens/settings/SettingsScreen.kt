@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nbks.mi.domain.model.*
+import com.nbks.mi.ui.theme.LocalIsJa
 import com.nbks.mi.ui.viewmodel.SettingsViewModel
 
 // ─────────────────────────────────────────────
@@ -40,7 +41,7 @@ fun SettingsScreen(
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
     val schedules by viewModel.schedules.collectAsStateWithLifecycle()
-    val isJa = java.util.Locale.getDefault().language == "ja"
+    val isJa = LocalIsJa.current
 
     var currentSection by remember { mutableStateOf<SettingsSection?>(null) }
 
@@ -49,7 +50,8 @@ fun SettingsScreen(
             TopAppBar(
                 title = {
                     Text(
-                        if (currentSection == null) (if (isJa) "設定" else "Settings") else currentSection!!.title,
+                        if (currentSection == null) (if (isJa) "設定" else "Settings")
+                        else if (isJa) currentSection!!.jaTitle else currentSection!!.enTitle,
                         style = MaterialTheme.typography.titleMedium,
                     )
                 },
@@ -89,6 +91,7 @@ fun SettingsScreen(
                         settings = settings,
                         onDarkModeChange = viewModel::setDarkMode,
                         onDynamicColorChange = viewModel::setDynamicColor,
+                        onAppLanguageChange = viewModel::setAppLanguage,
                         onClockStyleChange = viewModel::setClockStyle,
                         onWallpaperUriChange = viewModel::setWallpaperUri,
                         onWallpaperDimChange = viewModel::setWallpaperDimAlpha,
@@ -115,10 +118,16 @@ fun SettingsScreen(
     }
 }
 
-enum class SettingsSection(val title: String, val icon: ImageVector, val description: String) {
-    DISPLAY("表示・テーマ", Icons.Default.Palette, "ダーク/ライト、壁紙、時計スタイル"),
-    LMSTUDIO("AI (LMStudio)", Icons.Default.SmartToy, "外部AIサーバーの接続設定"),
-    SCHEDULE("スケジュール", Icons.Default.Schedule, "時間帯による画面制御"),
+enum class SettingsSection(
+    val jaTitle: String,
+    val enTitle: String,
+    val icon: ImageVector,
+    val jaDescription: String,
+    val enDescription: String,
+) {
+    DISPLAY("表示・テーマ", "Display", Icons.Default.Palette, "ダーク/ライト、壁紙、時計スタイル", "Theme, wallpaper, clock style"),
+    LMSTUDIO("AI (LMStudio)", "AI (LMStudio)", Icons.Default.SmartToy, "外部AIサーバーの接続設定", "External AI server connection"),
+    SCHEDULE("スケジュール", "Schedule", Icons.Default.Schedule, "時間帯による画面制御", "Screen behavior by time"),
 }
 
 @Composable
@@ -137,6 +146,7 @@ private fun SettingsMainMenu(onSectionSelect: (SettingsSection) -> Unit) {
 
 @Composable
 private fun SettingsSectionCard(section: SettingsSection, onClick: () -> Unit) {
+    val isJa = LocalIsJa.current
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
         shape = RoundedCornerShape(12.dp),
@@ -162,9 +172,9 @@ private fun SettingsSectionCard(section: SettingsSection, onClick: () -> Unit) {
             }
             Spacer(Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(section.title, style = MaterialTheme.typography.titleSmall)
+                Text(if (isJa) section.jaTitle else section.enTitle, style = MaterialTheme.typography.titleSmall)
                 Text(
-                    section.description,
+                    if (isJa) section.jaDescription else section.enDescription,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -187,6 +197,7 @@ fun DisplaySettings(
     settings: AppSettings,
     onDarkModeChange: (Boolean) -> Unit,
     onDynamicColorChange: (Boolean) -> Unit,
+    onAppLanguageChange: (AppLanguage) -> Unit,
     onClockStyleChange: (ClockStyle) -> Unit,
     onWallpaperUriChange: (String) -> Unit,
     onWallpaperDimChange: (Float) -> Unit,
@@ -194,6 +205,7 @@ fun DisplaySettings(
     onWidgetOpacityChange: (Float) -> Unit,
 ) {
     val context = LocalContext.current
+    val isJa = LocalIsJa.current
     val wallpaperLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
@@ -206,10 +218,10 @@ fun DisplaySettings(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            SettingsCategoryLabel("テーマ")
+            SettingsCategoryLabel(if (isJa) "テーマ" else "Theme")
             SettingsToggleItem(
-                title = "ダークモード",
-                subtitle = "アプリの配色を暗くします",
+                title = if (isJa) "ダークモード" else "Dark mode",
+                subtitle = if (isJa) "アプリの配色を暗くします" else "Use a dark color scheme",
                 icon = Icons.Default.DarkMode,
                 checked = settings.isDarkMode,
                 onCheckedChange = onDarkModeChange,
@@ -217,21 +229,46 @@ fun DisplaySettings(
         }
         item {
             SettingsToggleItem(
-                title = "ダイナミックカラー",
-                subtitle = "Android 12+ の壁紙カラーを使用",
+                title = if (isJa) "ダイナミックカラー" else "Dynamic color",
+                subtitle = if (isJa) "Android 12+ の壁紙カラーを使用" else "Use wallpaper colors on Android 12+",
                 icon = Icons.Default.ColorLens,
                 checked = settings.useDynamicColor,
                 onCheckedChange = onDynamicColorChange,
             )
         }
         item {
-            SettingsCategoryLabel("時計スタイル")
+            SettingsCategoryLabel(if (isJa) "言語" else "Language")
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                AppLanguage.entries.forEach { language ->
+                    val label = when (language) {
+                        AppLanguage.SYSTEM -> if (isJa) "システムに合わせる" else "Follow system"
+                        AppLanguage.JAPANESE -> "日本語"
+                        AppLanguage.ENGLISH -> "English"
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onAppLanguageChange(language) }
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(
+                            selected = settings.appLanguage == language,
+                            onClick = { onAppLanguageChange(language) },
+                        )
+                        Text(label, style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+        }
+        item {
+            SettingsCategoryLabel(if (isJa) "時計スタイル" else "Clock style")
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 ClockStyle.entries.forEach { style ->
                     val label = when (style) {
-                        ClockStyle.ANALOG -> "アナログ"
-                        ClockStyle.DIGITAL -> "デジタル"
-                        ClockStyle.BOTH -> "両方"
+                        ClockStyle.ANALOG -> if (isJa) "アナログ" else "Analog"
+                        ClockStyle.DIGITAL -> if (isJa) "デジタル" else "Digital"
+                        ClockStyle.BOTH -> if (isJa) "両方" else "Both"
                     }
                     Row(
                         modifier = Modifier
@@ -250,26 +287,30 @@ fun DisplaySettings(
             }
         }
         item {
-            SettingsCategoryLabel("壁紙")
+            SettingsCategoryLabel(if (isJa) "壁紙" else "Wallpaper")
             OutlinedCard(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = if (settings.wallpaperUri.isNotEmpty()) "壁紙が設定されています" else "壁紙未設定",
+                            text = if (settings.wallpaperUri.isNotEmpty()) {
+                                if (isJa) "壁紙が設定されています" else "Wallpaper is set"
+                            } else {
+                                if (isJa) "壁紙未設定" else "No wallpaper selected"
+                            },
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.weight(1f),
                         )
                         if (settings.wallpaperUri.isNotEmpty()) {
                             TextButton(onClick = { onWallpaperUriChange("") }) {
-                                Text("削除", color = MaterialTheme.colorScheme.error)
+                                Text(if (isJa) "削除" else "Remove", color = MaterialTheme.colorScheme.error)
                             }
                         }
                         Button(onClick = { wallpaperLauncher.launch("image/*") }) {
-                            Text("選択", style = MaterialTheme.typography.labelMedium)
+                            Text(if (isJa) "選択" else "Choose", style = MaterialTheme.typography.labelMedium)
                         }
                     }
                     if (settings.wallpaperUri.isNotEmpty()) {
-                        Text("壁紙の暗さ: ${(settings.wallpaperDimAlpha * 100).toInt()}%")
+                        Text(if (isJa) "壁紙の暗さ: ${(settings.wallpaperDimAlpha * 100).toInt()}%" else "Wallpaper dim: ${(settings.wallpaperDimAlpha * 100).toInt()}%")
                         Slider(
                             value = settings.wallpaperDimAlpha,
                             onValueChange = onWallpaperDimChange,
@@ -280,9 +321,9 @@ fun DisplaySettings(
             }
         }
         item {
-            SettingsCategoryLabel("ウィジェット")
+            SettingsCategoryLabel(if (isJa) "ウィジェット" else "Widgets")
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("ウィジェットの不透明度: ${(settings.widgetOpacity * 100).toInt()}%")
+                Text(if (isJa) "ウィジェットの不透明度: ${(settings.widgetOpacity * 100).toInt()}%" else "Widget opacity: ${(settings.widgetOpacity * 100).toInt()}%")
                 Slider(
                     value = settings.widgetOpacity,
                     onValueChange = onWidgetOpacityChange,
@@ -291,10 +332,10 @@ fun DisplaySettings(
             }
         }
         item {
-            SettingsCategoryLabel("その他")
+            SettingsCategoryLabel(if (isJa) "その他" else "Other")
             SettingsToggleItem(
-                title = "画面常時点灯",
-                subtitle = "充電中など画面が自動消灯しないよう",
+                title = if (isJa) "画面常時点灯" else "Keep screen on",
+                subtitle = if (isJa) "充電中など画面が自動消灯しないよう" else "Prevent the screen from sleeping",
                 icon = Icons.Default.ScreenLockLandscape,
                 checked = settings.keepScreenOn,
                 onCheckedChange = onKeepScreenOnChange,
